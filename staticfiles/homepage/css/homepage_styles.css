@@ -1,0 +1,66 @@
+/* homepage_styles.css */
+
+/* Sticky header */
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333333;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000; /* Ensure header is on top of other content */
+}
+
+.header-left {
+  flex: 1;
+}
+
+.logo {
+  margin: 0;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.header-right ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header-right ul li {
+  display: inline;
+  margin-right: 50px;
+}
+
+.header-right ul li a,
+.nav-btn {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* Welcome message */
+.welcome-message {
+  background-color: #181818;
+  padding: 20px;
+  margin-top: 80px; /* Adjust according to the height of your header */
+  text-align: center;
+}
+
+/* homepage_styles.css */
+
+/* Sign out button */
+.nav-btn {
+  background-color: #ff0000; /* Red background color */
+  border: none; /* Remove border */
+  padding: 8px 16px; /* Add padding */
+  border-radius: 4px; /* Add border radius for rounded corners */
+}
+
+/* Dark background for the body */
+body {
+  background-color: #222222; /* Dark background color */
+  color: #ffffff; /* White text color */
+}

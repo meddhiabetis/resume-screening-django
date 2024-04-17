@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'authentication/css/signin_styles.css' %}"
+    />
+  </head>
+
+  <body>
+    <div class="success-message-container">
+      {% if account_created %}
+      <div class="success-message">
+        <span class="tick">&#10003;</span> Account created successfully. You can
+        now login.
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="login-container">
+      <div class="login-box">
+        <h2>Login</h2>
+        <form action="/signin/" method="post" class="login-form">
+          {% csrf_token %}
+          <div class="input-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+
+          <div class="input-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+
+          <button type="submit" class="login-btn">Login</button>
+
+          <p>
+            Don't have an account? <a href="{% url 'signup' %}">Register</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

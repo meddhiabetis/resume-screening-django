@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'authentication/css/signup_styles.css' %}"
+    />
+  </head>
+
+  <body>
+    <div class="signup-container">
+      <div class="signup-box">
+        <h2>Register</h2>
+        <form action="/signup/" method="post" class="signup-form">
+          {% csrf_token %}
+          <div class="input-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
+            {% for error in form.username.errors %}
+            <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          </div>
+
+          <div class="input-group">
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="fname" required />
+            {% for error in form.fname.errors %}
+            <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          </div>
+
+          <div class="input-group">
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="lname" required />
+            {% for error in form.lname.errors %}
+            <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          </div>
+
+          <div class="input-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+            {% for error in form.email.errors %}
+            <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          </div>
+
+          <div class="input-group">
+            <label for="pass1">Password:</label>
+            <input type="password" id="password1" name="password1" required />
+            {% for error in form.password1.errors %}
+            <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          </div>
+
+          <div class="input-group">
+            <label for="pass2">Confirm Password:</label>
+            <input type="password" id="password2" name="password2" required />
+            {% for error in form.password2.errors %}
+            <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          </div>
+
+          <button type="submit" class="signup-btn">Register</button>
+        </form>
+
+        <p>Already have an account? <a href="{% url 'signin' %}">Sign in</a></p>
+      </div>
+    </div>
+  </body>
+  <script>
+    document
+      .getElementById("signup-form")
+      .addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+        // You can add additional validation or AJAX submission logic here if needed
+        this.submit(); // Submit the form programmatically after validation
+      });
+  </script>
+</html>

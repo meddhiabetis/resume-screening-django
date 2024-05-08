@@ -1,0 +1,1706 @@
+[
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "messages",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "messages",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "forms",
+        "importPath": "django",
+        "description": "django",
+        "isExtraImport": true,
+        "detail": "django",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "django.contrib.auth.models",
+        "description": "django.contrib.auth.models",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.models",
+        "documentation": {}
+    },
+    {
+        "label": "password_validation",
+        "importPath": "django.contrib.auth",
+        "description": "django.contrib.auth",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth",
+        "documentation": {}
+    },
+    {
+        "label": "authenticate",
+        "importPath": "django.contrib.auth",
+        "description": "django.contrib.auth",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "importPath": "django.contrib.auth",
+        "description": "django.contrib.auth",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth",
+        "documentation": {}
+    },
+    {
+        "label": "logout",
+        "importPath": "django.contrib.auth",
+        "description": "django.contrib.auth",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth",
+        "documentation": {}
+    },
+    {
+        "label": "logout",
+        "importPath": "django.contrib.auth",
+        "description": "django.contrib.auth",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "reverse",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "reverse",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "joblib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "joblib",
+        "description": "joblib",
+        "detail": "joblib",
+        "documentation": {}
+    },
+    {
+        "label": "WordCloud",
+        "importPath": "wordcloud",
+        "description": "wordcloud",
+        "isExtraImport": true,
+        "detail": "wordcloud",
+        "documentation": {}
+    },
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "base64",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "base64",
+        "description": "base64",
+        "detail": "base64",
+        "documentation": {}
+    },
+    {
+        "label": "clean_resume",
+        "importPath": "homepage.pdf_utils",
+        "description": "homepage.pdf_utils",
+        "isExtraImport": true,
+        "detail": "homepage.pdf_utils",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "isExtraImport": true,
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "isExtraImport": true,
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TfidfVectorizer",
+        "importPath": "sklearn.feature_extraction.text",
+        "description": "sklearn.feature_extraction.text",
+        "isExtraImport": true,
+        "detail": "sklearn.feature_extraction.text",
+        "documentation": {}
+    },
+    {
+        "label": "CountVectorizer",
+        "importPath": "sklearn.feature_extraction.text",
+        "description": "sklearn.feature_extraction.text",
+        "isExtraImport": true,
+        "detail": "sklearn.feature_extraction.text",
+        "documentation": {}
+    },
+    {
+        "label": "TfidfVectorizer",
+        "importPath": "sklearn.feature_extraction.text",
+        "description": "sklearn.feature_extraction.text",
+        "isExtraImport": true,
+        "detail": "sklearn.feature_extraction.text",
+        "documentation": {}
+    },
+    {
+        "label": "TfidfVectorizer",
+        "importPath": "sklearn.feature_extraction.text",
+        "description": "sklearn.feature_extraction.text",
+        "isExtraImport": true,
+        "detail": "sklearn.feature_extraction.text",
+        "documentation": {}
+    },
+    {
+        "label": "TfidfVectorizer",
+        "importPath": "sklearn.feature_extraction.text",
+        "description": "sklearn.feature_extraction.text",
+        "isExtraImport": true,
+        "detail": "sklearn.feature_extraction.text",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "pdfplumber",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pdfplumber",
+        "description": "pdfplumber",
+        "detail": "pdfplumber",
+        "documentation": {}
+    },
+    {
+        "label": "HttpResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "HttpResponseRedirect",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "TemplateView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "LoginRequiredMixin",
+        "importPath": "django.contrib.auth.mixins",
+        "description": "django.contrib.auth.mixins",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.mixins",
+        "documentation": {}
+    },
+    {
+        "label": "FileSystemStorage",
+        "importPath": "django.core.files.storage",
+        "description": "django.core.files.storage",
+        "isExtraImport": true,
+        "detail": "django.core.files.storage",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "resume_screening",
+        "description": "resume_screening",
+        "isExtraImport": true,
+        "detail": "resume_screening",
+        "documentation": {}
+    },
+    {
+        "label": "requiredText",
+        "importPath": "resume_classifier_model.resume_classifier",
+        "description": "resume_classifier_model.resume_classifier",
+        "isExtraImport": true,
+        "detail": "resume_classifier_model.resume_classifier",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "KNeighborsClassifier",
+        "importPath": "sklearn.neighbors",
+        "description": "sklearn.neighbors",
+        "isExtraImport": true,
+        "detail": "sklearn.neighbors",
+        "documentation": {}
+    },
+    {
+        "label": "OneVsRestClassifier",
+        "importPath": "sklearn.multiclass",
+        "description": "sklearn.multiclass",
+        "isExtraImport": true,
+        "detail": "sklearn.multiclass",
+        "documentation": {}
+    },
+    {
+        "label": "train_test_split",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "string",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "string",
+        "description": "string",
+        "detail": "string",
+        "documentation": {}
+    },
+    {
+        "label": "nltk",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "nltk",
+        "description": "nltk",
+        "detail": "nltk",
+        "documentation": {}
+    },
+    {
+        "label": "stopwords",
+        "importPath": "nltk.corpus",
+        "description": "nltk.corpus",
+        "isExtraImport": true,
+        "detail": "nltk.corpus",
+        "documentation": {}
+    },
+    {
+        "label": "get_asgi_application",
+        "importPath": "django.core.asgi",
+        "description": "django.core.asgi",
+        "isExtraImport": true,
+        "detail": "django.core.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "static",
+        "importPath": "django.conf.urls.static",
+        "description": "django.conf.urls.static",
+        "isExtraImport": true,
+        "detail": "django.conf.urls.static",
+        "documentation": {}
+    },
+    {
+        "label": "signin",
+        "importPath": "authentication.views",
+        "description": "authentication.views",
+        "isExtraImport": true,
+        "detail": "authentication.views",
+        "documentation": {}
+    },
+    {
+        "label": "signout",
+        "importPath": "authentication.views",
+        "description": "authentication.views",
+        "isExtraImport": true,
+        "detail": "authentication.views",
+        "documentation": {}
+    },
+    {
+        "label": "signup",
+        "importPath": "authentication.views",
+        "description": "authentication.views",
+        "isExtraImport": true,
+        "detail": "authentication.views",
+        "documentation": {}
+    },
+    {
+        "label": "HomePageView",
+        "importPath": "homepage.views",
+        "description": "homepage.views",
+        "isExtraImport": true,
+        "detail": "homepage.views",
+        "documentation": {}
+    },
+    {
+        "label": "about",
+        "importPath": "homepage.views",
+        "description": "homepage.views",
+        "isExtraImport": true,
+        "detail": "homepage.views",
+        "documentation": {}
+    },
+    {
+        "label": "contact",
+        "importPath": "homepage.views",
+        "description": "homepage.views",
+        "isExtraImport": true,
+        "detail": "homepage.views",
+        "documentation": {}
+    },
+    {
+        "label": "analysis_results_single",
+        "importPath": "homepage.views",
+        "description": "homepage.views",
+        "isExtraImport": true,
+        "detail": "homepage.views",
+        "documentation": {}
+    },
+    {
+        "label": "analysis_results_multiple",
+        "importPath": "homepage.views",
+        "description": "homepage.views",
+        "isExtraImport": true,
+        "detail": "homepage.views",
+        "documentation": {}
+    },
+    {
+        "label": "get_wsgi_application",
+        "importPath": "django.core.wsgi",
+        "description": "django.core.wsgi",
+        "isExtraImport": true,
+        "detail": "django.core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "site",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "site",
+        "description": "site",
+        "detail": "site",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "os.path",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os.path",
+        "description": "os.path",
+        "detail": "os.path",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Container",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TextIO",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "cast",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Container",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "ArgumentParser",
+        "importPath": "argparse",
+        "description": "argparse",
+        "isExtraImport": true,
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "pdfminer",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pdfminer",
+        "description": "pdfminer",
+        "detail": "pdfminer",
+        "documentation": {}
+    },
+    {
+        "label": "PDFDocument",
+        "importPath": "pdfminer.pdfdocument",
+        "description": "pdfminer.pdfdocument",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfdocument",
+        "documentation": {}
+    },
+    {
+        "label": "PDFNoOutlines",
+        "importPath": "pdfminer.pdfdocument",
+        "description": "pdfminer.pdfdocument",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfdocument",
+        "documentation": {}
+    },
+    {
+        "label": "PDFXRefFallback",
+        "importPath": "pdfminer.pdfdocument",
+        "description": "pdfminer.pdfdocument",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfdocument",
+        "documentation": {}
+    },
+    {
+        "label": "PDFPage",
+        "importPath": "pdfminer.pdfpage",
+        "description": "pdfminer.pdfpage",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfpage",
+        "documentation": {}
+    },
+    {
+        "label": "PDFParser",
+        "importPath": "pdfminer.pdfparser",
+        "description": "pdfminer.pdfparser",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdfparser",
+        "documentation": {}
+    },
+    {
+        "label": "PDFObjectNotFound",
+        "importPath": "pdfminer.pdftypes",
+        "description": "pdfminer.pdftypes",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdftypes",
+        "documentation": {}
+    },
+    {
+        "label": "PDFValueError",
+        "importPath": "pdfminer.pdftypes",
+        "description": "pdfminer.pdftypes",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdftypes",
+        "documentation": {}
+    },
+    {
+        "label": "PDFStream",
+        "importPath": "pdfminer.pdftypes",
+        "description": "pdfminer.pdftypes",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdftypes",
+        "documentation": {}
+    },
+    {
+        "label": "PDFObjRef",
+        "importPath": "pdfminer.pdftypes",
+        "description": "pdfminer.pdftypes",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdftypes",
+        "documentation": {}
+    },
+    {
+        "label": "resolve1",
+        "importPath": "pdfminer.pdftypes",
+        "description": "pdfminer.pdftypes",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdftypes",
+        "documentation": {}
+    },
+    {
+        "label": "stream_value",
+        "importPath": "pdfminer.pdftypes",
+        "description": "pdfminer.pdftypes",
+        "isExtraImport": true,
+        "detail": "pdfminer.pdftypes",
+        "documentation": {}
+    },
+    {
+        "label": "PSKeyword",
+        "importPath": "pdfminer.psparser",
+        "description": "pdfminer.psparser",
+        "isExtraImport": true,
+        "detail": "pdfminer.psparser",
+        "documentation": {}
+    },
+    {
+        "label": "PSLiteral",
+        "importPath": "pdfminer.psparser",
+        "description": "pdfminer.psparser",
+        "isExtraImport": true,
+        "detail": "pdfminer.psparser",
+        "documentation": {}
+    },
+    {
+        "label": "LIT",
+        "importPath": "pdfminer.psparser",
+        "description": "pdfminer.psparser",
+        "isExtraImport": true,
+        "detail": "pdfminer.psparser",
+        "documentation": {}
+    },
+    {
+        "label": "isnumber",
+        "importPath": "pdfminer.utils",
+        "description": "pdfminer.utils",
+        "isExtraImport": true,
+        "detail": "pdfminer.utils",
+        "documentation": {}
+    },
+    {
+        "label": "AnyIO",
+        "importPath": "pdfminer.utils",
+        "description": "pdfminer.utils",
+        "isExtraImport": true,
+        "detail": "pdfminer.utils",
+        "documentation": {}
+    },
+    {
+        "label": "pdfminer.high_level",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pdfminer.high_level",
+        "description": "pdfminer.high_level",
+        "detail": "pdfminer.high_level",
+        "documentation": {}
+    },
+    {
+        "label": "LAParams",
+        "importPath": "pdfminer.layout",
+        "description": "pdfminer.layout",
+        "isExtraImport": true,
+        "detail": "pdfminer.layout",
+        "documentation": {}
+    },
+    {
+        "label": "AuthenticationConfig",
+        "kind": 6,
+        "importPath": "authentication.apps",
+        "description": "authentication.apps",
+        "peekOfCode": "class AuthenticationConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'authentication'",
+        "detail": "authentication.apps",
+        "documentation": {}
+    },
+    {
+        "label": "SignUpForm",
+        "kind": 6,
+        "importPath": "authentication.forms",
+        "description": "authentication.forms",
+        "peekOfCode": "class SignUpForm(forms.ModelForm):\n    password1 = forms.CharField(label='Password', widget=forms.PasswordInput, help_text=password_validation.password_validators_help_text_html())\n    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)\n    class Meta:\n        model = User\n        fields = ('username', 'email')\n    def clean_password2(self):\n        password1 = self.cleaned_data.get(\"password1\")\n        password2 = self.cleaned_data.get(\"password2\")\n        if password1 and password2 and password1!= password2:",
+        "detail": "authentication.forms",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "authentication.urls",
+        "description": "authentication.urls",
+        "peekOfCode": "urlpatterns = [\n    path('', views.index, name='index'),\n    path('signup', views.signup, name='signup'),\n    path('signin', views.signin, name='signin'),\n    path('signout', views.signout, name='signout'),\n]",
+        "detail": "authentication.urls",
+        "documentation": {}
+    },
+    {
+        "label": "signin",
+        "kind": 2,
+        "importPath": "authentication.views",
+        "description": "authentication.views",
+        "peekOfCode": "def signin(request):\n    if request.method == \"POST\":\n        username = request.POST['username']\n        password = request.POST['password']\n        user = authenticate(username=username, password=password)\n        if user is not None:\n            login(request, user)\n            messages.success(request, \"Logged in Successfully!\")\n            print(user.first_name)  # Check if the first name is retrieved correctly\n            return redirect('home')  # Redirect to the home page without any additional parameters",
+        "detail": "authentication.views",
+        "documentation": {}
+    },
+    {
+        "label": "signup",
+        "kind": 2,
+        "importPath": "authentication.views",
+        "description": "authentication.views",
+        "peekOfCode": "def signup(request):\n    if request.method == \"POST\":\n        form = SignUpForm(request.POST)  # Use Django's built-in forms for data validation\n        if form.is_valid():\n            user = form.save()\n            # Use.first_name instead of user.first_name to get the actual value\n            print(user.first_name)\n            raw_password = form.cleaned_data.get('password1')\n            user = authenticate(username=user.username, password=raw_password)\n            login(request, user)",
+        "detail": "authentication.views",
+        "documentation": {}
+    },
+    {
+        "label": "signout",
+        "kind": 2,
+        "importPath": "authentication.views",
+        "description": "authentication.views",
+        "peekOfCode": "def signout(request):\n    logout(request)\n    messages.success(request, \"Logged Out Successfully!\")\n    return redirect('signin')  # Redirect to the login page",
+        "detail": "authentication.views",
+        "documentation": {}
+    },
+    {
+        "label": "generate_word_cloud",
+        "kind": 2,
+        "importPath": "homepage.analysis",
+        "description": "homepage.analysis",
+        "peekOfCode": "def generate_word_cloud(text):\n    if isinstance(text, str):\n        wordcloud = WordCloud(width=800, height=400, background_color='#f4eae0').generate(text)\n        # Save the word cloud image\n        wordcloud_path = os.path.join(BASE_DIR, 'homepage', 'static', 'wordcloud.png')\n        wordcloud.to_file(wordcloud_path)\n        return wordcloud_path\n    else:\n        # If the text is not a string, return None or handle it appropriately\n        return None  # You can adjust this based on your requirements",
+        "detail": "homepage.analysis",
+        "documentation": {}
+    },
+    {
+        "label": "classify_resumes",
+        "kind": 2,
+        "importPath": "homepage.analysis",
+        "description": "homepage.analysis",
+        "peekOfCode": "def classify_resumes(resumes,requiredText):\n    # Load the trained classifier\n    classifier = joblib.load('resume_classifier_model/resume_classifier.pkl')  \n    # Load the TfidfVectorizer\n    word_vectorizer = TfidfVectorizer(\n        sublinear_tf=True,\n        stop_words='english'\n    )\n    word_vectorizer.fit(requiredText)\n    # Preprocess the resumes (cleaning, tokenization, etc.)",
+        "detail": "homepage.analysis",
+        "documentation": {}
+    },
+    {
+        "label": "match_candidates_based_on_skills",
+        "kind": 2,
+        "importPath": "homepage.analysis",
+        "description": "homepage.analysis",
+        "peekOfCode": "def match_candidates_based_on_skills(required_skills):\n    # to do\n    pass\ndef calculate_relevance_score(candidate_skills, required_skills):\n    pass\ndef classify_resumes(resumes,requiredText):\n    # Load the trained classifier\n    classifier = joblib.load('resume_classifier_model/resume_classifier.pkl')  \n    # Load the TfidfVectorizer\n    word_vectorizer = TfidfVectorizer(",
+        "detail": "homepage.analysis",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_relevance_score",
+        "kind": 2,
+        "importPath": "homepage.analysis",
+        "description": "homepage.analysis",
+        "peekOfCode": "def calculate_relevance_score(candidate_skills, required_skills):\n    pass\ndef classify_resumes(resumes,requiredText):\n    # Load the trained classifier\n    classifier = joblib.load('resume_classifier_model/resume_classifier.pkl')  \n    # Load the TfidfVectorizer\n    word_vectorizer = TfidfVectorizer(\n        sublinear_tf=True,\n        stop_words='english'\n    )",
+        "detail": "homepage.analysis",
+        "documentation": {}
+    },
+    {
+        "label": "classify_resumes",
+        "kind": 2,
+        "importPath": "homepage.analysis",
+        "description": "homepage.analysis",
+        "peekOfCode": "def classify_resumes(resumes,requiredText):\n    # Load the trained classifier\n    classifier = joblib.load('resume_classifier_model/resume_classifier.pkl')  \n    # Load the TfidfVectorizer\n    word_vectorizer = TfidfVectorizer(\n        sublinear_tf=True,\n        stop_words='english'\n    )\n    word_vectorizer.fit(requiredText)\n    # Preprocess the resumes (cleaning, tokenization, etc.)",
+        "detail": "homepage.analysis",
+        "documentation": {}
+    },
+    {
+        "label": "HomepageConfig",
+        "kind": 6,
+        "importPath": "homepage.apps",
+        "description": "homepage.apps",
+        "peekOfCode": "class HomepageConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'homepage'",
+        "detail": "homepage.apps",
+        "documentation": {}
+    },
+    {
+        "label": "clean_resume",
+        "kind": 2,
+        "importPath": "homepage.pdf_utils",
+        "description": "homepage.pdf_utils",
+        "peekOfCode": "def clean_resume(text):\n    # Remove URLs\n    text = re.sub(r'http\\S+', '', text)\n    # Remove special characters and symbols\n    text = re.sub(r'[^\\w\\s]', '', text)\n    # Remove extra whitespace\n    text = re.sub(r'\\s+', ' ', text)\n    return text.strip()\ndef extract_text_from_pdf(pdf_path):\n    with pdfplumber.open(pdf_path) as pdf:",
+        "detail": "homepage.pdf_utils",
+        "documentation": {}
+    },
+    {
+        "label": "extract_text_from_pdf",
+        "kind": 2,
+        "importPath": "homepage.pdf_utils",
+        "description": "homepage.pdf_utils",
+        "peekOfCode": "def extract_text_from_pdf(pdf_path):\n    with pdfplumber.open(pdf_path) as pdf:\n        text = \"\"\n        for page in pdf.pages:\n            text += page.extract_text()\n    return clean_resume(text)\ndef process_uploaded_resumes(resumes_directory):\n    extracted_texts = []\n    file_names = []\n    for filename in os.listdir(resumes_directory):",
+        "detail": "homepage.pdf_utils",
+        "documentation": {}
+    },
+    {
+        "label": "process_uploaded_resumes",
+        "kind": 2,
+        "importPath": "homepage.pdf_utils",
+        "description": "homepage.pdf_utils",
+        "peekOfCode": "def process_uploaded_resumes(resumes_directory):\n    extracted_texts = []\n    file_names = []\n    for filename in os.listdir(resumes_directory):\n        if filename.endswith('.pdf'):\n            pdf_path = os.path.join(resumes_directory, filename)\n            text = extract_text_from_pdf(pdf_path)\n            extracted_texts.append(text)\n            file_names.append(filename)\n    return extracted_texts, file_names",
+        "detail": "homepage.pdf_utils",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "homepage.urls",
+        "description": "homepage.urls",
+        "peekOfCode": "urlpatterns = [\n    path('', HomePageView.as_view(), name='home'),\n    path('about/', about, name='about'),\n    path('contact/', contact, name='contact'),\n    path('signout/', signout, name='signout'),\n    path('analysis/single/', analysis_results_single, name='analysis_results_single'),  # Update URL pattern for single resume analysis\n    path('analysis/multiple/', analysis_results_multiple, name='analysis_results_multiple'),  # Update URL pattern for multiple resume analysis\n]",
+        "detail": "homepage.urls",
+        "documentation": {}
+    },
+    {
+        "label": "HomePageView",
+        "kind": 6,
+        "importPath": "homepage.views",
+        "description": "homepage.views",
+        "peekOfCode": "class HomePageView(LoginRequiredMixin, TemplateView):\n    template_name = 'index.html'\n    def get_context_data(self, **kwargs):\n        context = super().get_context_data(**kwargs)\n        context['fname'] = self.kwargs.get('fname', '')  # Get the 'fname' parameter from URL\n        return context\ndef about(request):\n    return render(request, 'about.html')\ndef contact(request):\n    return render(request, 'contact.html')",
+        "detail": "homepage.views",
+        "documentation": {}
+    },
+    {
+        "label": "about",
+        "kind": 2,
+        "importPath": "homepage.views",
+        "description": "homepage.views",
+        "peekOfCode": "def about(request):\n    return render(request, 'about.html')\ndef contact(request):\n    return render(request, 'contact.html')\ndef signout(request):\n    logout(request)\n    messages.success(request, \"Logged Out Successfully!\")\n    return redirect('home')  # Redirect to the home page using GET request\ndef analysis_results_single(request):\n    if request.method == 'POST' and request.FILES.get('resume'):",
+        "detail": "homepage.views",
+        "documentation": {}
+    },
+    {
+        "label": "contact",
+        "kind": 2,
+        "importPath": "homepage.views",
+        "description": "homepage.views",
+        "peekOfCode": "def contact(request):\n    return render(request, 'contact.html')\ndef signout(request):\n    logout(request)\n    messages.success(request, \"Logged Out Successfully!\")\n    return redirect('home')  # Redirect to the home page using GET request\ndef analysis_results_single(request):\n    if request.method == 'POST' and request.FILES.get('resume'):\n        resume = request.FILES['resume']\n        fs = FileSystemStorage()",
+        "detail": "homepage.views",
+        "documentation": {}
+    },
+    {
+        "label": "signout",
+        "kind": 2,
+        "importPath": "homepage.views",
+        "description": "homepage.views",
+        "peekOfCode": "def signout(request):\n    logout(request)\n    messages.success(request, \"Logged Out Successfully!\")\n    return redirect('home')  # Redirect to the home page using GET request\ndef analysis_results_single(request):\n    if request.method == 'POST' and request.FILES.get('resume'):\n        resume = request.FILES['resume']\n        fs = FileSystemStorage()\n        # Delete existing files in 'resume' folder\n        delete_existing_files('resume')",
+        "detail": "homepage.views",
+        "documentation": {}
+    },
+    {
+        "label": "analysis_results_single",
+        "kind": 2,
+        "importPath": "homepage.views",
+        "description": "homepage.views",
+        "peekOfCode": "def analysis_results_single(request):\n    if request.method == 'POST' and request.FILES.get('resume'):\n        resume = request.FILES['resume']\n        fs = FileSystemStorage()\n        # Delete existing files in 'resume' folder\n        delete_existing_files('resume')\n        # Save the uploaded resume to the 'resume' folder\n        fs.save(os.path.join('homepage', 'resume', resume.name), resume)\n        resume_directory = os.path.join(settings.BASE_DIR, 'homepage', 'resume')\n        # Pass the directory path containing the uploaded resume",
+        "detail": "homepage.views",
+        "documentation": {}
+    },
+    {
+        "label": "analysis_results_multiple",
+        "kind": 2,
+        "importPath": "homepage.views",
+        "description": "homepage.views",
+        "peekOfCode": "def analysis_results_multiple(request):\n    if request.method == 'POST' and request.FILES.getlist('resume'):\n        uploaded_resumes = request.FILES.getlist('resume')\n        fs = FileSystemStorage()\n        # Delete existing files in 'resumes' folder\n        delete_existing_files('resumes')\n        for resume in uploaded_resumes:\n            fs.save(os.path.join('homepage/resumes', resume.name), resume)\n        resumes_directory = os.path.join(settings.BASE_DIR, 'homepage', 'resumes')\n        extracted_texts, file_names = process_uploaded_resumes(resumes_directory)",
+        "detail": "homepage.views",
+        "documentation": {}
+    },
+    {
+        "label": "delete_existing_files",
+        "kind": 2,
+        "importPath": "homepage.views",
+        "description": "homepage.views",
+        "peekOfCode": "def delete_existing_files(folder):\n    folder_path = os.path.join(settings.BASE_DIR, 'homepage', folder)\n    for filename in os.listdir(folder_path):\n        file_path = os.path.join(folder_path, filename)\n        os.remove(file_path)",
+        "detail": "homepage.views",
+        "documentation": {}
+    },
+    {
+        "label": "cleanResume",
+        "kind": 2,
+        "importPath": "resume_classifier_model.resume_classifier",
+        "description": "resume_classifier_model.resume_classifier",
+        "peekOfCode": "def cleanResume(resumeText):\n    # Remove URLs\n    resumeText = re.sub('http\\S+\\s*', ' ', resumeText)\n    # Remove RT and cc\n    resumeText = re.sub('RT|cc', ' ', resumeText)\n    # Remove hashtags\n    resumeText = re.sub('#\\S+', '', resumeText)\n    # Remove mentions\n    resumeText = re.sub('@\\S+', '  ', resumeText)\n    # Remove punctuations",
+        "detail": "resume_classifier_model.resume_classifier",
+        "documentation": {}
+    },
+    {
+        "label": "dataset_path",
+        "kind": 5,
+        "importPath": "resume_classifier_model.resume_classifier",
+        "description": "resume_classifier_model.resume_classifier",
+        "peekOfCode": "dataset_path = os.path.join(os.getcwd(), 'resume_classifier_model', 'UpdatedResumeDataSet.csv')\n# Load the dataset\nresumeDataSet = pd.read_csv(dataset_path, encoding='utf-8')\n# Preprocess the resumes\ndef cleanResume(resumeText):\n    # Remove URLs\n    resumeText = re.sub('http\\S+\\s*', ' ', resumeText)\n    # Remove RT and cc\n    resumeText = re.sub('RT|cc', ' ', resumeText)\n    # Remove hashtags",
+        "detail": "resume_classifier_model.resume_classifier",
+        "documentation": {}
+    },
+    {
+        "label": "resumeDataSet",
+        "kind": 5,
+        "importPath": "resume_classifier_model.resume_classifier",
+        "description": "resume_classifier_model.resume_classifier",
+        "peekOfCode": "resumeDataSet = pd.read_csv(dataset_path, encoding='utf-8')\n# Preprocess the resumes\ndef cleanResume(resumeText):\n    # Remove URLs\n    resumeText = re.sub('http\\S+\\s*', ' ', resumeText)\n    # Remove RT and cc\n    resumeText = re.sub('RT|cc', ' ', resumeText)\n    # Remove hashtags\n    resumeText = re.sub('#\\S+', '', resumeText)\n    # Remove mentions",
+        "detail": "resume_classifier_model.resume_classifier",
+        "documentation": {}
+    },
+    {
+        "label": "resumeDataSet['cleaned_resume']",
+        "kind": 5,
+        "importPath": "resume_classifier_model.resume_classifier",
+        "description": "resume_classifier_model.resume_classifier",
+        "peekOfCode": "resumeDataSet['cleaned_resume'] = resumeDataSet['Resume'].apply(cleanResume)\n# Prepare features and target\nrequiredText = resumeDataSet['cleaned_resume'].values\nrequiredTarget = resumeDataSet['Category'].values\n# Vectorize the text data\nvectorizer = TfidfVectorizer(sublinear_tf=True, stop_words='english')\nWordFeatures = vectorizer.fit_transform(requiredText)\n# Split the data into train and test sets\nX_train, X_test, y_train, y_test = train_test_split(WordFeatures, requiredTarget, test_size=0.2, random_state=42)\n# Define the classifier",
+        "detail": "resume_classifier_model.resume_classifier",
+        "documentation": {}
+    },
+    {
+        "label": "requiredText",
+        "kind": 5,
+        "importPath": "resume_classifier_model.resume_classifier",
+        "description": "resume_classifier_model.resume_classifier",
+        "peekOfCode": "requiredText = resumeDataSet['cleaned_resume'].values\nrequiredTarget = resumeDataSet['Category'].values\n# Vectorize the text data\nvectorizer = TfidfVectorizer(sublinear_tf=True, stop_words='english')\nWordFeatures = vectorizer.fit_transform(requiredText)\n# Split the data into train and test sets\nX_train, X_test, y_train, y_test = train_test_split(WordFeatures, requiredTarget, test_size=0.2, random_state=42)\n# Define the classifier\nclassifier = OneVsRestClassifier(KNeighborsClassifier())\n# Train the classifier",
+        "detail": "resume_classifier_model.resume_classifier",
+        "documentation": {}
+    },
+    {
+        "label": "requiredTarget",
+        "kind": 5,
+        "importPath": "resume_classifier_model.resume_classifier",
+        "description": "resume_classifier_model.resume_classifier",
+        "peekOfCode": "requiredTarget = resumeDataSet['Category'].values\n# Vectorize the text data\nvectorizer = TfidfVectorizer(sublinear_tf=True, stop_words='english')\nWordFeatures = vectorizer.fit_transform(requiredText)\n# Split the data into train and test sets\nX_train, X_test, y_train, y_test = train_test_split(WordFeatures, requiredTarget, test_size=0.2, random_state=42)\n# Define the classifier\nclassifier = OneVsRestClassifier(KNeighborsClassifier())\n# Train the classifier\nclassifier.fit(X_train, y_train)",
+        "detail": "resume_classifier_model.resume_classifier",
+        "documentation": {}
+    },
+    {
+        "label": "vectorizer",
+        "kind": 5,
+        "importPath": "resume_classifier_model.resume_classifier",
+        "description": "resume_classifier_model.resume_classifier",
+        "peekOfCode": "vectorizer = TfidfVectorizer(sublinear_tf=True, stop_words='english')\nWordFeatures = vectorizer.fit_transform(requiredText)\n# Split the data into train and test sets\nX_train, X_test, y_train, y_test = train_test_split(WordFeatures, requiredTarget, test_size=0.2, random_state=42)\n# Define the classifier\nclassifier = OneVsRestClassifier(KNeighborsClassifier())\n# Train the classifier\nclassifier.fit(X_train, y_train)\n# Evaluate the classifier\ntrain_accuracy = classifier.score(X_train, y_train)",
+        "detail": "resume_classifier_model.resume_classifier",
+        "documentation": {}
+    },
+    {
+        "label": "WordFeatures",
+        "kind": 5,
+        "importPath": "resume_classifier_model.resume_classifier",
+        "description": "resume_classifier_model.resume_classifier",
+        "peekOfCode": "WordFeatures = vectorizer.fit_transform(requiredText)\n# Split the data into train and test sets\nX_train, X_test, y_train, y_test = train_test_split(WordFeatures, requiredTarget, test_size=0.2, random_state=42)\n# Define the classifier\nclassifier = OneVsRestClassifier(KNeighborsClassifier())\n# Train the classifier\nclassifier.fit(X_train, y_train)\n# Evaluate the classifier\ntrain_accuracy = classifier.score(X_train, y_train)\ntest_accuracy = classifier.score(X_test, y_test)",
+        "detail": "resume_classifier_model.resume_classifier",
+        "documentation": {}
+    },
+    {
+        "label": "classifier",
+        "kind": 5,
+        "importPath": "resume_classifier_model.resume_classifier",
+        "description": "resume_classifier_model.resume_classifier",
+        "peekOfCode": "classifier = OneVsRestClassifier(KNeighborsClassifier())\n# Train the classifier\nclassifier.fit(X_train, y_train)\n# Evaluate the classifier\ntrain_accuracy = classifier.score(X_train, y_train)\ntest_accuracy = classifier.score(X_test, y_test)\nprint(f\"Training accuracy: {train_accuracy}\")\nprint(f\"Test accuracy: {test_accuracy}\")\n# Save the trained model\nmodel_path = os.path.join(os.getcwd(), 'resume_classifier_model', 'resume_classifier.pkl')",
+        "detail": "resume_classifier_model.resume_classifier",
+        "documentation": {}
+    },
+    {
+        "label": "train_accuracy",
+        "kind": 5,
+        "importPath": "resume_classifier_model.resume_classifier",
+        "description": "resume_classifier_model.resume_classifier",
+        "peekOfCode": "train_accuracy = classifier.score(X_train, y_train)\ntest_accuracy = classifier.score(X_test, y_test)\nprint(f\"Training accuracy: {train_accuracy}\")\nprint(f\"Test accuracy: {test_accuracy}\")\n# Save the trained model\nmodel_path = os.path.join(os.getcwd(), 'resume_classifier_model', 'resume_classifier.pkl')\njoblib.dump(classifier, model_path)",
+        "detail": "resume_classifier_model.resume_classifier",
+        "documentation": {}
+    },
+    {
+        "label": "test_accuracy",
+        "kind": 5,
+        "importPath": "resume_classifier_model.resume_classifier",
+        "description": "resume_classifier_model.resume_classifier",
+        "peekOfCode": "test_accuracy = classifier.score(X_test, y_test)\nprint(f\"Training accuracy: {train_accuracy}\")\nprint(f\"Test accuracy: {test_accuracy}\")\n# Save the trained model\nmodel_path = os.path.join(os.getcwd(), 'resume_classifier_model', 'resume_classifier.pkl')\njoblib.dump(classifier, model_path)",
+        "detail": "resume_classifier_model.resume_classifier",
+        "documentation": {}
+    },
+    {
+        "label": "model_path",
+        "kind": 5,
+        "importPath": "resume_classifier_model.resume_classifier",
+        "description": "resume_classifier_model.resume_classifier",
+        "peekOfCode": "model_path = os.path.join(os.getcwd(), 'resume_classifier_model', 'resume_classifier.pkl')\njoblib.dump(classifier, model_path)",
+        "detail": "resume_classifier_model.resume_classifier",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "resume_screening.asgi",
+        "description": "resume_screening.asgi",
+        "peekOfCode": "application = get_asgi_application()",
+        "detail": "resume_screening.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure-*6jcl5b)jwt70+hdkq#=n1_v=i)z^4mr7*7&w*wyl&bden8#hp'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "SECRET_KEY = 'django-insecure-*6jcl5b)jwt70+hdkq#=n1_v=i)z^4mr7*7&w*wyl&bden8#hp'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n]",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "INSTALLED_APPS",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n]\nMIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MIDDLEWARE",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]\nROOT_URLCONF = 'resume_screening.urls'",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT_URLCONF",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "ROOT_URLCONF = 'resume_screening.urls'\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': ['authentication/templates','homepage/templates',],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATES",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': ['authentication/templates','homepage/templates',],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',\n                'django.contrib.auth.context_processors.auth',",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "WSGI_APPLICATION",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "WSGI_APPLICATION = 'resume_screening.wsgi.application'\n# Database\n# https://docs.djangoproject.com/en/4.2/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n# Password validation",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n# Password validation\n# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_PASSWORD_VALIDATORS",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',\n    },",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "LANGUAGE_CODE",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "LANGUAGE_CODE = 'en-us'\nTIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = '/static/'  # Corrected configuration\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR, 'authentication/static'),",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "TIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = '/static/'  # Corrected configuration\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR, 'authentication/static'),\n    os.path.join(BASE_DIR, 'homepage/static'),# Corrected path",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = '/static/'  # Corrected configuration\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR, 'authentication/static'),\n    os.path.join(BASE_DIR, 'homepage/static'),# Corrected path\n]",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_TZ",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = '/static/'  # Corrected configuration\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR, 'authentication/static'),\n    os.path.join(BASE_DIR, 'homepage/static'),# Corrected path\n]\n# Default primary key field type",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "STATIC_URL = '/static/'  # Corrected configuration\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR, 'authentication/static'),\n    os.path.join(BASE_DIR, 'homepage/static'),# Corrected path\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nLOGIN_URL = 'signin'  # Replace 'signin' with the name of your login URL pattern",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_ROOT",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR, 'authentication/static'),\n    os.path.join(BASE_DIR, 'homepage/static'),# Corrected path\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nLOGIN_URL = 'signin'  # Replace 'signin' with the name of your login URL pattern",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATICFILES_DIRS",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "STATICFILES_DIRS = [\n    os.path.join(BASE_DIR, 'authentication/static'),\n    os.path.join(BASE_DIR, 'homepage/static'),# Corrected path\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nLOGIN_URL = 'signin'  # Replace 'signin' with the name of your login URL pattern",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_AUTO_FIELD",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nLOGIN_URL = 'signin'  # Replace 'signin' with the name of your login URL pattern",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "LOGIN_URL",
+        "kind": 5,
+        "importPath": "resume_screening.settings",
+        "description": "resume_screening.settings",
+        "peekOfCode": "LOGIN_URL = 'signin'  # Replace 'signin' with the name of your login URL pattern",
+        "detail": "resume_screening.settings",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "resume_screening.urls",
+        "description": "resume_screening.urls",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('', HomePageView.as_view(), name='home'),  # Homepage view\n    path('signin/', signin, name='signin'),  # Custom sign-in view\n    path('signout/', signout, name='signout'),  # Custom sign-out view\n    path('signup/', signup, name='signup'),  # Custom sign-up view\n    path('about/', about, name='about'),  # About page\n    path('contact/', contact, name='contact'),   # Include 'contact' URLs\n    path('analysis/single/', analysis_results_single, name='analysis_results_single'),  # Update URL pattern and view name for single resume analysis\n    path('analysis/multiple/', analysis_results_multiple, name='analysis_results_multiple'),  # Update URL pattern and view name for multiple resume analysis",
+        "detail": "resume_screening.urls",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "resume_screening.wsgi",
+        "description": "resume_screening.wsgi",
+        "peekOfCode": "application = get_wsgi_application()",
+        "detail": "resume_screening.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "bin_dir",
+        "kind": 5,
+        "importPath": "venv.Scripts.activate_this",
+        "description": "venv.Scripts.activate_this",
+        "peekOfCode": "bin_dir = os.path.dirname(abs_file)\nbase = bin_dir[: -len(\"Scripts\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir] + os.environ.get(\"PATH\", \"\").split(os.pathsep))\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\Lib\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)",
+        "detail": "venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "base",
+        "kind": 5,
+        "importPath": "venv.Scripts.activate_this",
+        "description": "venv.Scripts.activate_this",
+        "peekOfCode": "base = bin_dir[: -len(\"Scripts\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir] + os.environ.get(\"PATH\", \"\").split(os.pathsep))\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\Lib\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]",
+        "detail": "venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"PATH\"]",
+        "kind": 5,
+        "importPath": "venv.Scripts.activate_this",
+        "description": "venv.Scripts.activate_this",
+        "peekOfCode": "os.environ[\"PATH\"] = os.pathsep.join([bin_dir] + os.environ.get(\"PATH\", \"\").split(os.pathsep))\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\Lib\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": "venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"VIRTUAL_ENV\"]",
+        "kind": 5,
+        "importPath": "venv.Scripts.activate_this",
+        "description": "venv.Scripts.activate_this",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"..\\Lib\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": "venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "prev_length",
+        "kind": 5,
+        "importPath": "venv.Scripts.activate_this",
+        "description": "venv.Scripts.activate_this",
+        "peekOfCode": "prev_length = len(sys.path)\nfor lib in \"..\\Lib\\site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": "venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.path[:]",
+        "kind": 5,
+        "importPath": "venv.Scripts.activate_this",
+        "description": "venv.Scripts.activate_this",
+        "peekOfCode": "sys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": "venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.real_prefix",
+        "kind": 5,
+        "importPath": "venv.Scripts.activate_this",
+        "description": "venv.Scripts.activate_this",
+        "peekOfCode": "sys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": "venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.prefix",
+        "kind": 5,
+        "importPath": "venv.Scripts.activate_this",
+        "description": "venv.Scripts.activate_this",
+        "peekOfCode": "sys.prefix = base",
+        "detail": "venv.Scripts.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "escape",
+        "kind": 2,
+        "importPath": "venv.Scripts.dumppdf",
+        "description": "venv.Scripts.dumppdf",
+        "peekOfCode": "def escape(s: Union[str, bytes]) -> str:\n    if isinstance(s, bytes):\n        us = str(s, \"latin-1\")\n    else:\n        us = s\n    return ESC_PAT.sub(lambda m: \"&#%d;\" % ord(m.group(0)), us)\ndef dumpxml(out: TextIO, obj: object, codec: Optional[str] = None) -> None:\n    if obj is None:\n        out.write(\"<null />\")\n        return",
+        "detail": "venv.Scripts.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "dumpxml",
+        "kind": 2,
+        "importPath": "venv.Scripts.dumppdf",
+        "description": "venv.Scripts.dumppdf",
+        "peekOfCode": "def dumpxml(out: TextIO, obj: object, codec: Optional[str] = None) -> None:\n    if obj is None:\n        out.write(\"<null />\")\n        return\n    if isinstance(obj, dict):\n        out.write('<dict size=\"%d\">\\n' % len(obj))\n        for (k, v) in obj.items():\n            out.write(\"<key>%s</key>\\n\" % k)\n            out.write(\"<value>\")\n            dumpxml(out, v)",
+        "detail": "venv.Scripts.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "dumptrailers",
+        "kind": 2,
+        "importPath": "venv.Scripts.dumppdf",
+        "description": "venv.Scripts.dumppdf",
+        "peekOfCode": "def dumptrailers(\n    out: TextIO, doc: PDFDocument, show_fallback_xref: bool = False\n) -> None:\n    for xref in doc.xrefs:\n        if not isinstance(xref, PDFXRefFallback) or show_fallback_xref:\n            out.write(\"<trailer>\\n\")\n            dumpxml(out, xref.get_trailer())\n            out.write(\"\\n</trailer>\\n\\n\")\n    no_xrefs = all(isinstance(xref, PDFXRefFallback) for xref in doc.xrefs)\n    if no_xrefs and not show_fallback_xref:",
+        "detail": "venv.Scripts.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "dumpallobjs",
+        "kind": 2,
+        "importPath": "venv.Scripts.dumppdf",
+        "description": "venv.Scripts.dumppdf",
+        "peekOfCode": "def dumpallobjs(\n    out: TextIO,\n    doc: PDFDocument,\n    codec: Optional[str] = None,\n    show_fallback_xref: bool = False,\n) -> None:\n    visited = set()\n    out.write(\"<pdf>\")\n    for xref in doc.xrefs:\n        for objid in xref.get_objids():",
+        "detail": "venv.Scripts.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "dumpoutline",
+        "kind": 2,
+        "importPath": "venv.Scripts.dumppdf",
+        "description": "venv.Scripts.dumppdf",
+        "peekOfCode": "def dumpoutline(\n    outfp: TextIO,\n    fname: str,\n    objids: Any,\n    pagenos: Container[int],\n    password: str = \"\",\n    dumpall: bool = False,\n    codec: Optional[str] = None,\n    extractdir: Optional[str] = None,\n) -> None:",
+        "detail": "venv.Scripts.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "extractembedded",
+        "kind": 2,
+        "importPath": "venv.Scripts.dumppdf",
+        "description": "venv.Scripts.dumppdf",
+        "peekOfCode": "def extractembedded(fname: str, password: str, extractdir: str) -> None:\n    def extract1(objid: int, obj: Dict[str, Any]) -> None:\n        filename = os.path.basename(obj.get(\"UF\") or cast(bytes, obj.get(\"F\")).decode())\n        fileref = obj[\"EF\"].get(\"UF\") or obj[\"EF\"].get(\"F\")\n        fileobj = doc.getobj(fileref.objid)\n        if not isinstance(fileobj, PDFStream):\n            error_msg = (\n                \"unable to process PDF: reference for %r is not a \"\n                \"PDFStream\" % filename\n            )",
+        "detail": "venv.Scripts.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "dumppdf",
+        "kind": 2,
+        "importPath": "venv.Scripts.dumppdf",
+        "description": "venv.Scripts.dumppdf",
+        "peekOfCode": "def dumppdf(\n    outfp: TextIO,\n    fname: str,\n    objids: Iterable[int],\n    pagenos: Container[int],\n    password: str = \"\",\n    dumpall: bool = False,\n    codec: Optional[str] = None,\n    extractdir: Optional[str] = None,\n    show_fallback_xref: bool = False,",
+        "detail": "venv.Scripts.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "create_parser",
+        "kind": 2,
+        "importPath": "venv.Scripts.dumppdf",
+        "description": "venv.Scripts.dumppdf",
+        "peekOfCode": "def create_parser() -> ArgumentParser:\n    parser = ArgumentParser(description=__doc__, add_help=True)\n    parser.add_argument(\n        \"files\",\n        type=str,\n        default=None,\n        nargs=\"+\",\n        help=\"One or more paths to PDF files.\",\n    )\n    parser.add_argument(",
+        "detail": "venv.Scripts.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "venv.Scripts.dumppdf",
+        "description": "venv.Scripts.dumppdf",
+        "peekOfCode": "def main(argv: Optional[List[str]] = None) -> None:\n    parser = create_parser()\n    args = parser.parse_args(args=argv)\n    if args.debug:\n        logging.getLogger().setLevel(logging.DEBUG)\n    if args.outfile == \"-\":\n        outfp = sys.stdout\n    else:\n        outfp = open(args.outfile, \"w\")\n    if args.objects:",
+        "detail": "venv.Scripts.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "venv.Scripts.dumppdf",
+        "description": "venv.Scripts.dumppdf",
+        "peekOfCode": "logger = logging.getLogger(__name__)\nESC_PAT = re.compile(r'[\\000-\\037&<>()\"\\042\\047\\134\\177-\\377]')\ndef escape(s: Union[str, bytes]) -> str:\n    if isinstance(s, bytes):\n        us = str(s, \"latin-1\")\n    else:\n        us = s\n    return ESC_PAT.sub(lambda m: \"&#%d;\" % ord(m.group(0)), us)\ndef dumpxml(out: TextIO, obj: object, codec: Optional[str] = None) -> None:\n    if obj is None:",
+        "detail": "venv.Scripts.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "ESC_PAT",
+        "kind": 5,
+        "importPath": "venv.Scripts.dumppdf",
+        "description": "venv.Scripts.dumppdf",
+        "peekOfCode": "ESC_PAT = re.compile(r'[\\000-\\037&<>()\"\\042\\047\\134\\177-\\377]')\ndef escape(s: Union[str, bytes]) -> str:\n    if isinstance(s, bytes):\n        us = str(s, \"latin-1\")\n    else:\n        us = s\n    return ESC_PAT.sub(lambda m: \"&#%d;\" % ord(m.group(0)), us)\ndef dumpxml(out: TextIO, obj: object, codec: Optional[str] = None) -> None:\n    if obj is None:\n        out.write(\"<null />\")",
+        "detail": "venv.Scripts.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "LITERAL_FILESPEC",
+        "kind": 5,
+        "importPath": "venv.Scripts.dumppdf",
+        "description": "venv.Scripts.dumppdf",
+        "peekOfCode": "LITERAL_FILESPEC = LIT(\"Filespec\")\nLITERAL_EMBEDDEDFILE = LIT(\"EmbeddedFile\")\ndef extractembedded(fname: str, password: str, extractdir: str) -> None:\n    def extract1(objid: int, obj: Dict[str, Any]) -> None:\n        filename = os.path.basename(obj.get(\"UF\") or cast(bytes, obj.get(\"F\")).decode())\n        fileref = obj[\"EF\"].get(\"UF\") or obj[\"EF\"].get(\"F\")\n        fileobj = doc.getobj(fileref.objid)\n        if not isinstance(fileobj, PDFStream):\n            error_msg = (\n                \"unable to process PDF: reference for %r is not a \"",
+        "detail": "venv.Scripts.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "LITERAL_EMBEDDEDFILE",
+        "kind": 5,
+        "importPath": "venv.Scripts.dumppdf",
+        "description": "venv.Scripts.dumppdf",
+        "peekOfCode": "LITERAL_EMBEDDEDFILE = LIT(\"EmbeddedFile\")\ndef extractembedded(fname: str, password: str, extractdir: str) -> None:\n    def extract1(objid: int, obj: Dict[str, Any]) -> None:\n        filename = os.path.basename(obj.get(\"UF\") or cast(bytes, obj.get(\"F\")).decode())\n        fileref = obj[\"EF\"].get(\"UF\") or obj[\"EF\"].get(\"F\")\n        fileobj = doc.getobj(fileref.objid)\n        if not isinstance(fileobj, PDFStream):\n            error_msg = (\n                \"unable to process PDF: reference for %r is not a \"\n                \"PDFStream\" % filename",
+        "detail": "venv.Scripts.dumppdf",
+        "documentation": {}
+    },
+    {
+        "label": "float_or_disabled",
+        "kind": 2,
+        "importPath": "venv.Scripts.pdf2txt",
+        "description": "venv.Scripts.pdf2txt",
+        "peekOfCode": "def float_or_disabled(x: str) -> Optional[float]:\n    if x.lower().strip() == \"disabled\":\n        return None\n    try:\n        return float(x)\n    except ValueError:\n        raise argparse.ArgumentTypeError(\"invalid float value: {}\".format(x))\ndef extract_text(\n    files: Iterable[str] = [],\n    outfile: str = \"-\",",
+        "detail": "venv.Scripts.pdf2txt",
+        "documentation": {}
+    },
+    {
+        "label": "extract_text",
+        "kind": 2,
+        "importPath": "venv.Scripts.pdf2txt",
+        "description": "venv.Scripts.pdf2txt",
+        "peekOfCode": "def extract_text(\n    files: Iterable[str] = [],\n    outfile: str = \"-\",\n    laparams: Optional[LAParams] = None,\n    output_type: str = \"text\",\n    codec: str = \"utf-8\",\n    strip_control: bool = False,\n    maxpages: int = 0,\n    page_numbers: Optional[Container[int]] = None,\n    password: str = \"\",",
+        "detail": "venv.Scripts.pdf2txt",
+        "documentation": {}
+    },
+    {
+        "label": "create_parser",
+        "kind": 2,
+        "importPath": "venv.Scripts.pdf2txt",
+        "description": "venv.Scripts.pdf2txt",
+        "peekOfCode": "def create_parser() -> argparse.ArgumentParser:\n    parser = argparse.ArgumentParser(description=__doc__, add_help=True)\n    parser.add_argument(\n        \"files\",\n        type=str,\n        default=None,\n        nargs=\"+\",\n        help=\"One or more paths to PDF files.\",\n    )\n    parser.add_argument(",
+        "detail": "venv.Scripts.pdf2txt",
+        "documentation": {}
+    },
+    {
+        "label": "parse_args",
+        "kind": 2,
+        "importPath": "venv.Scripts.pdf2txt",
+        "description": "venv.Scripts.pdf2txt",
+        "peekOfCode": "def parse_args(args: Optional[List[str]]) -> argparse.Namespace:\n    parsed_args = create_parser().parse_args(args=args)\n    # Propagate parsed layout parameters to LAParams object\n    if parsed_args.no_laparams:\n        parsed_args.laparams = None\n    else:\n        parsed_args.laparams = LAParams(\n            line_overlap=parsed_args.line_overlap,\n            char_margin=parsed_args.char_margin,\n            line_margin=parsed_args.line_margin,",
+        "detail": "venv.Scripts.pdf2txt",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "venv.Scripts.pdf2txt",
+        "description": "venv.Scripts.pdf2txt",
+        "peekOfCode": "def main(args: Optional[List[str]] = None) -> int:\n    parsed_args = parse_args(args)\n    outfp = extract_text(**vars(parsed_args))\n    outfp.close()\n    return 0\nif __name__ == \"__main__\":\n    sys.exit(main())",
+        "detail": "venv.Scripts.pdf2txt",
+        "documentation": {}
+    },
+    {
+        "label": "OUTPUT_TYPES",
+        "kind": 5,
+        "importPath": "venv.Scripts.pdf2txt",
+        "description": "venv.Scripts.pdf2txt",
+        "peekOfCode": "OUTPUT_TYPES = ((\".htm\", \"html\"), (\".html\", \"html\"), (\".xml\", \"xml\"), (\".tag\", \"tag\"))\ndef float_or_disabled(x: str) -> Optional[float]:\n    if x.lower().strip() == \"disabled\":\n        return None\n    try:\n        return float(x)\n    except ValueError:\n        raise argparse.ArgumentTypeError(\"invalid float value: {}\".format(x))\ndef extract_text(\n    files: Iterable[str] = [],",
+        "detail": "venv.Scripts.pdf2txt",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def main():\n    \"\"\"Run administrative tasks.\"\"\"\n    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'resume_screening.settings')\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:\n        raise ImportError(\n            \"Couldn't import Django. Are you sure it's installed and \"\n            \"available on your PYTHONPATH environment variable? Did you \"\n            \"forget to activate a virtual environment?\"",
+        "detail": "manage",
+        "documentation": {}
+    }
+]

@@ -28,3 +28,4 @@ def process_uploaded_resumes(resumes_directory):
             extracted_texts.append(text)
             file_names.append(filename)
     return extracted_texts, file_names
+

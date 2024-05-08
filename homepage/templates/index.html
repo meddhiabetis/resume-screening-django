@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SkillMatch</title>
+    <title>SkillMatch - Home</title>
     <link
       rel="stylesheet"
       href="{% static 'homepage/css/homepage_styles.css' %}"
@@ -27,18 +27,36 @@
     <div class="welcome-message">
       <p>Hello, {{ fname }}!</p>
     </div>
-    <h2>Upload a PDF File</h2>
-    <!-- HTML form for file upload -->
-    <form
-      method="post"
-      enctype="multipart/form-data"
-      action="{% url 'upload_resumes' %}"
-    >
-      {% csrf_token %}
-      <label for="files">Select files:</label>
-      <input type="file" id="files" name="resume" multiple /><br /><br />
-      <input type="submit" value="Upload" />
-    </form>
+    <div class="upload-resumes-sm">
+      <div class="upload-resumes">
+        <h2>Analyze Single Resume</h2>
+        <form
+          method="post"
+          action="{% url 'analysis_results_single' %}"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <label for="files">Select file:</label>
+          <input type="file" name="resume" /><br /><br />
+          <button type="submit">Analyze</button>
+        </form>
+      </div>
+
+      <div class="upload-resumes">
+        <h2>Analyze Multiple Resumes</h2>
+        <!-- HTML form for file upload -->
+        <form
+          method="post"
+          enctype="multipart/form-data"
+          action="{% url 'analysis_results_multiple' %}"
+        >
+          {% csrf_token %}
+          <label for="files">Select files:</label>
+          <input type="file" id="files" name="resume" multiple /><br /><br />
+          <button type="submit">Analyze</button>
+        </form>
+      </div>
+    </div>
 
     <!-- Other content sections will go here -->
   </body>

@@ -1,11 +1,11 @@
 from django.urls import path
-from .views import HomePageView, about, contact, signout, upload_resumes, analysis_results  # Import the analysis_results view function
+from .views import HomePageView, about, contact, signout, analysis_results_single, analysis_results_multiple  # Updated import
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
     path('about/', about, name='about'),
     path('contact/', contact, name='contact'),
     path('signout/', signout, name='signout'),
-    path('upload/', upload_resumes, name='upload_resumes'),
-    path('analysis/', analysis_results, name='analysis_results'),  # Add the URL pattern for analysis_results
+    path('analysis/single/', analysis_results_single, name='analysis_results_single'),  # Update URL pattern for single resume analysis
+    path('analysis/multiple/', analysis_results_multiple, name='analysis_results_multiple'),  # Update URL pattern for multiple resume analysis
 ]

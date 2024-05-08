@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysis Results - Single Resume</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'homepage/css/analysis_results_styles.css' %}"
+    />
+  </head>
+  <body>
+    <header class="sticky-header">
+      <div class="header-left">
+        <h1 class="logo">SkillMatch</h1>
+      </div>
+      <nav class="header-right">
+        <ul>
+          <li><a href="{{ BASE_URL }}{% url 'home' %}">Home</a></li>
+          <li><a href="{{ BASE_URL }}{% url 'about' %}">About</a></li>
+          <li><a href="{{ BASE_URL }}{% url 'contact' %}">Contact</a></li>
+          <li><a href="{% url 'signout' %}" class="nav-btn">Sign Out</a></li>
+        </ul>
+      </nav>
+    </header>
+    <br /><br />
+    <h1>Analysis Results - Single Resume</h1>
+    <!-- Display the extracted text -->
+
+    {% if wordcloud_path %}
+    <h2>Word Cloud</h2>
+    <img src="{% static 'wordcloud.png' %}" alt="Word Cloud" id="wordcloud" />
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysis Results</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'homepage/css/analysis_results_styles.css' %}"
+    />
+  </head>
+  <body>
+    <header class="sticky-header">
+      <div class="header-left">
+        <h1 class="logo">SkillMatch</h1>
+      </div>
+      <nav class="header-right">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/signout/" class="nav-btn">Sign Out</a></li>
+        </ul>
+      </nav>
+    </header>
+    <br /><br />
+    <h1>Analysis Results</h1>
+    <h2>Resume Categories</h2>
+    <ul>
+      {% for category, count in categories.items %}
+      <li>{{ category }}: {{ count }}</li>
+      {% endfor %}
+    </ul>
+    <p>Total Resumes: {{ total_resumes }}</p>
+
+    <!-- Display the donut chart -->
+    <div class="donut-chart-container">
+      <canvas id="donutChart" width="300" height="300"></canvas>
+    </div>
+    <br /><br /><br />
+    <!-- Add a search form -->
+    <form method="GET" action="{% url 'analysis_results_multiple' %}">
+      <input type="text" name="search" placeholder="Search for skills..." />
+      <button type="submit">Search</button>
+    </form>
+
+    <!-- Display the resumes -->
+    {% if search_query %}
+    <h2>Search Results for "{{ search_query }}"</h2>
+    <ul>
+      {% for resume in filtered_resumes %}
+      <li>{{ resume }}</li>
+      {% empty %}
+      <li>No matching resumes found.</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      // Get the data from the Django template
+      const categories = JSON.parse('{{ categories|escapejs }}');
+      const totalResumes = {{ total_resumes }};
+
+      // Extract labels and data from categories dictionary
+      const labels = Object.keys(categories);
+      const data = Object.values(categories);
+
+      // Generate random colors for the chart
+      const backgroundColors = data.map(() => '#' + Math.floor(Math.random()*16777215).toString(16));
+
+      // Get the canvas element
+      const donutCtx = document.getElementById("donutChart").getContext("2d");
+
+      // Create the doughnut chart
+      const doughnutChart = new Chart(donutCtx, {
+          type: "doughnut",
+          data: {
+              labels: labels,
+              datasets: [{
+                  label: "Resume Categories",
+                  data: data,
+                  backgroundColor: backgroundColors,
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              responsive: false,
+              legend: {
+                  position: 'right'
+              }
+          }
+      });
+    </script>
+  </body>
+</html>

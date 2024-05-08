@@ -41,14 +41,6 @@
   text-decoration: none;
 }
 
-/* Welcome message */
-.welcome-message {
-  padding: 20px;
-  margin-top: 80px; /* Adjust according to the height of your header */
-  text-align: center;
-}
-
-/* Sign out button */
 .nav-btn {
   background-color: #803d3b; /* Red background color */
   border: none; /* Remove border */
@@ -58,13 +50,24 @@
 .nav-btn:hover {
   background-color: #df3626;
 }
+/* Welcome message */
+.welcome-message {
+  padding: 20px;
+  margin-top: 80px; /* Adjust according to the height of your header */
+  text-align: center;
+}
+
 /* Dark background for the body */
 body {
   background-color: #f4dfc8; /* Dark background color */
-  color: #f4eae0; /* White text color */
+  color: #000000; /* White text color */
   justify-content: center;
   align-items: center;
   height: 100vh; /* Make the body take up the full height of the viewport */
+}
+
+h1 {
+  color: #000000;
 }
 
 h2 {
@@ -118,16 +121,32 @@ input[type="submit"]:hover {
 .upload-resumes-sm {
   display: flex;
   flex-direction: row;
-  justify-content: center; /* Vertically center */
-  align-items: center; /* Horizontally center */
-  width: 100%; /* Set height to make the form occupy full height */
-  margin-left: 10%;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  width: 100%; /* Set width to 100% */
+  margin-left: 10%; /* Adjust margin as needed */
 }
 
 .upload-resumes {
   flex: 0 0 50%; /* Set width of each div */
-  justify-content: center; /* Vertically center */
-  align-items: center;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
   height: 100%; /* Set height to make the form occupy full height */
   width: 100%;
+}
+
+/* homepage_styles.css */
+
+#wordcloud {
+  display: block; /* Ensure it's a block-level element */
+  margin: 0 auto; /* Center horizontally */
+  width: 100%; /* Set width to 100% */
+  max-width: 800px; /* Optionally limit the maximum width */
+}
+
+.donut-chart-container {
+  display: block; /* Ensure it's a block-level element */
+  margin: 0 auto; /* Center horizontally */
+  width: 100%; /* Set width to 100% */
+  max-width: 800px; /* Optionally limit the maximum width */
 }

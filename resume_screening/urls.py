@@ -3,7 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from authentication.views import signin, signout, signup
-from homepage.views import HomePageView, about, contact, upload_resumes, analysis_results  # Updated import
+from homepage.views import HomePageView, about, contact, analysis_results_single, analysis_results_multiple  # Updated import
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,6 +13,6 @@ urlpatterns = [
     path('signup/', signup, name='signup'),  # Custom sign-up view
     path('about/', about, name='about'),  # About page
     path('contact/', contact, name='contact'),   # Include 'contact' URLs
-    path('upload/', upload_resumes, name='upload_resumes'),  # Updated URL pattern and view name
-    path('analysis/', analysis_results, name='analysis_results'),  # Add the analysis_results URL pattern
+    path('analysis/single/', analysis_results_single, name='analysis_results_single'),  # Update URL pattern and view name for single resume analysis
+    path('analysis/multiple/', analysis_results_multiple, name='analysis_results_multiple'),  # Update URL pattern and view name for multiple resume analysis
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

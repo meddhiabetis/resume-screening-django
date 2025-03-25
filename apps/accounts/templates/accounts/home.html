@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Welcome to Resume Screening Platform{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <h1 class="display-4 mb-4">Resume Screening Platform</h1>
+            <p class="lead mb-4">
+                Upload and analyze resumes efficiently with our AI-powered platform.
+            </p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg px-4 me-md-2">Go to Dashboard</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4 me-md-2">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-lg px-4">Register</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <img src="{% static 'images/resume-analysis.svg' %}" class="img-fluid" alt="Resume Analysis Illustration">
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Upload Resumes</h5>
+                    <p class="card-text">Upload multiple resumes and get them analyzed instantly.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">AI Analysis</h5>
+                    <p class="card-text">Get detailed insights using our advanced AI analysis.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Export Results</h5>
+                    <p class="card-text">Export analysis results in multiple formats.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

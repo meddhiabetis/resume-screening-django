@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}View Resume - {{ resume.original_filename }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">{{ resume.original_filename }}</li>
+                </ol>
+            </nav>
+
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Resume Details</h5>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-sm btn-outline-primary">Download</a>
+                        <form method="post" action="{% url 'resume_analysis:delete_resume' resume.file_id %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                    onclick="return confirm('Are you sure you want to delete this resume?')">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <p><strong>File Name:</strong> {{ resume.original_filename }}</p>
+                            <p><strong>Upload Date:</strong> {{ resume.upload_date|date:"F d, Y H:i" }}</p>
+                            <p><strong>Status:</strong> 
+                                <span class="badge {% if resume.status == 'processed' %}bg-success{% elif resume.status == 'failed' %}bg-danger{% else %}bg-warning{% endif %}">
+                                    {{ resume.status|title }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>Extracted Text</h6>
+                            <div class="border p-3 bg-light">
+                                <pre class="mb-0" style="white-space: pre-wrap;">{{ content.raw_text }}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if content.structured_data %}
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h6>Structured Data</h6>
+                            <div class="border p-3">
+                                <pre class="mb-0">{{ content.structured_data|pprint }}</pre>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

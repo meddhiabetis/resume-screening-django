@@ -1,0 +1,7 @@
+-r base.txt
+django-debug-toolbar
+pytest
+pytest-django
+black
+isort
+flake8

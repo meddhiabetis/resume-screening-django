@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="mb-0">Upload Resume</h4>
+        </div>
+        <div class="card-body">
+          <form
+            method="post"
+            action="{% url 'resume_analysis:upload_resume' %}"
+            enctype="multipart/form-data"
+          >
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="resume" class="form-label">Choose Resume File</label>
+              <input
+                type="file"
+                class="form-control"
+                id="resume"
+                name="resume"
+                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.tiff,.bmp"
+                required
+              />
+              <div class="form-text">
+                Supported formats: PDF, Word documents (DOC, DOCX), Images (JPG,
+                PNG, TIFF, BMP)
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload Resume</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Ensure file input accepts all specified formats
+  document.getElementById("resume").addEventListener("click", function () {
+    this.accept = ".pdf,.doc,.docx,.jpg,.jpeg,.png,.tiff,.bmp";
+  });
+</script>
+{% endblock %}

@@ -122,5 +122,15 @@ MAX_UPLOAD_SIZE = 5242880  # 5MB
 ALLOWED_RESUME_TYPES = [
     'application/pdf',
     'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'image/jpeg',
+    'image/png',
+    'image/tiff',
+    'image/bmp'
 ]
+
+# Minimum text length to consider successful extraction
+MIN_EXTRACTED_TEXT_LENGTH = 100
+
+# Increase PDF processing timeout if needed
+PDF_PROCESSING_TIMEOUT = 300  # 5 minutes

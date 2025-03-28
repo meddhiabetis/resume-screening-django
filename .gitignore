@@ -26,3 +26,35 @@ migrations/**/__pycache__/
 
 # Media and uploads
 media/
+
+# Python
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Django
+local_settings.py
+db.sqlite3-journal
+staticfiles/
+
+# Virtual Environment
+ENV/
+.venv/
+
+# IDE
+*.swp
+*.swo
+*~

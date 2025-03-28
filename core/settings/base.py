@@ -9,10 +9,10 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-your-secret-key-here')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
+DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = []
 
@@ -67,11 +67,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'resume_screening',
-        'USER': 'postgres',
-        'PASSWORD': 'betis08',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'resume_screening'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
@@ -137,7 +137,7 @@ MIN_EXTRACTED_TEXT_LENGTH = 100
 PDF_PROCESSING_TIMEOUT = 300  # 5 minutes
 
 # Add Mistral API settings
-MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY')# Increase timeout for LLM processing
+MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY')
 LLM_PROCESSING_TIMEOUT = 60  # seconds
 
 LOGGING = {

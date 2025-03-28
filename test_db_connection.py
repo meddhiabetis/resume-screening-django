@@ -8,11 +8,11 @@ load_dotenv()
 def test_postgres():
     try:
         conn = psycopg2.connect(
-            dbname='resume_screening',
-            user='postgres',
-            password='betis08',  # Replace with your password
-            host='localhost',
-            port='5432'
+            dbname=os.getenv('DB_NAME', 'resume_screening'),
+            user=os.getenv('DB_USER', 'postgres'),
+            password=os.getenv('DB_PASSWORD'),
+            host=os.getenv('DB_HOST', 'localhost'),
+            port=os.getenv('DB_PORT', '5432')
         )
         print("✅ PostgreSQL connection successful!")
         conn.close()

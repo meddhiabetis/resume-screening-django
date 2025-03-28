@@ -1,63 +1,328 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+{% block content %}
 <div class="container mt-4">
-  <h2>Resume Details</h2>
-
-  <div class="card mb-4">
-    <div class="card-header d-flex justify-content-between align-items-center">
-      <h5 class="mb-0">{{ resume.original_filename }}</h5>
-      <span
-        class="badge {% if resume.status == 'processed' %}bg-success{% elif resume.status == 'failed' %}bg-danger{% else %}bg-warning{% endif %}"
-      >
-        {{ resume.status|title }}
-      </span>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Resume Details</h2>
+        <span class="text-muted small">Last updated: {{ resume.upload_date|date:"Y-m-d H:i:s" }} UTC</span>
     </div>
-    <div class="card-body">
-      {% if resume.status == 'failed' %}
-      <div class="alert alert-danger">
-        <h5 class="alert-heading">Processing Error</h5>
-        <p>
-          {{ error|default:"An error occurred while processing this resume." }}
-        </p>
-        <hr />
-        <p class="mb-0">
-          Please try uploading a different file or ensure the document contains
-          readable text.
-        </p>
-      </div>
-      {% else %} {% if content.raw_text %}
-      <h5>Extracted Text:</h5>
-      <div class="border p-3 bg-light">
-        <pre class="mb-0" style="white-space: pre-wrap">
-{{ content.raw_text }}</pre
-        >
-      </div>
-      {% else %}
-      <p class="text-muted">No text content available.</p>
-      {% endif %} {% endif %}
+    
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">{{ resume.original_filename }}</h5>
+            <span class="badge {% if resume.status == 'processed' %}bg-success{% elif resume.status == 'failed' %}bg-danger{% else %}bg-warning{% endif %}">
+                {{ resume.status|title }}
+            </span>
+        </div>
+        <div class="card-body">
+            {% if resume.status == 'failed' %}
+                <div class="alert alert-danger">
+                    <h5 class="alert-heading">Processing Error</h5>
+                    <p>{{ error|default:"An error occurred while processing this resume." }}</p>
+                    {% if content.processing_error %}
+                    <hr>
+                    <p class="mb-0"><strong>Details:</strong> {{ content.processing_error }}</p>
+                    {% endif %}
+                </div>
+            {% else %}
+                {% if features %}
+                    <div class="row">
+                        <!-- Contact Information -->
+                        {% if features.contact_info %}
+                        <div class="col-12 mb-4">
+                            <h5 class="border-bottom pb-2">Contact Information</h5>
+                            <div class="card">
+                                <div class="card-body">
+                                    <dl class="row mb-0">
+                                        {% for key, value in features.contact_info.items %}
+                                        <dt class="col-sm-3">{{ key|title }}</dt>
+                                        <dd class="col-sm-9">{{ value|default:"-" }}</dd>
+                                        {% endfor %}
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Work Experience -->
+                        {% if features.work_experience %}
+                        <div class="col-12 mb-4">
+                            <h5 class="border-bottom pb-2">Work Experience</h5>
+                            {% for exp in features.work_experience %}
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ exp.title|default:"Position" }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ exp.company|default:"Company" }}</h6>
+                                    <p class="card-text"><small class="text-muted">{{ exp.dates|default:"Date not specified" }}</small></p>
+                                    {% if exp.responsibilities %}
+                                    <ul class="list-unstyled">
+                                        {% for resp in exp.responsibilities %}
+                                        <li>• {{ resp }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <!-- Skills -->
+                        {% if features.skills %}
+                        <div class="col-12 mb-4">
+                            <h5 class="border-bottom pb-2">Skills</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Technical Skills</h6>
+                                            <div class="d-flex flex-wrap gap-2">
+                                                {% for skill in features.skills.technical %}
+                                                <span class="badge bg-primary">{{ skill }}</span>
+                                                {% empty %}
+                                                <span class="text-muted">No technical skills listed</span>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Soft Skills</h6>
+                                            <div class="d-flex flex-wrap gap-2">
+                                                {% for skill in features.skills.soft %}
+                                                <span class="badge bg-secondary">{{ skill }}</span>
+                                                {% empty %}
+                                                <span class="text-muted">No soft skills listed</span>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Education -->
+                        {% if features.education %}
+                        <div class="col-12 mb-4">
+                            <h5 class="border-bottom pb-2">Education</h5>
+                            {% for edu in features.education %}
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ edu.degree|default:"Degree not specified" }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ edu.institution|default:"Institution not specified" }}</h6>
+                                    <p class="card-text">
+                                        <small class="text-muted">{{ edu.dates|default:"Dates not specified" }}</small>
+                                        {% if edu.gpa %}
+                                        <br><small class="text-muted">GPA: {{ edu.gpa }}</small>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <!-- Additional Sections -->
+                        <div class="col-12">
+                            <div class="row">
+                                <!-- Certifications -->
+                                {% if features.certifications %}
+                                <div class="col-md-4 mb-4">
+                                    <h5 class="border-bottom pb-2">Certifications</h5>
+                                    <div class="card">
+                                        <ul class="list-group list-group-flush">
+                                            {% for cert in features.certifications %}
+                                            <li class="list-group-item">{{ cert }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                                <!-- Languages -->
+                                {% if features.languages %}
+                                <div class="col-md-4 mb-4">
+                                    <h5 class="border-bottom pb-2">Languages</h5>
+                                    <div class="card">
+                                        <ul class="list-group list-group-flush">
+                                            {% for lang in features.languages %}
+                                            <li class="list-group-item">{{ lang }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                                <!-- Projects -->
+                                {% if features.projects %}
+                                <div class="col-md-{% if features.certifications and features.languages %}4{% elif features.certifications or features.languages %}8{% else %}12{% endif %} mb-4">
+                                    <h5 class="border-bottom pb-2">Projects</h5>
+                                    {% for project in features.projects %}
+                                    <div class="card mb-2">
+                                        <div class="card-body">
+                                            <h6 class="card-title">{{ project.name }}</h6>
+                                            <p class="card-text">{{ project.description }}</p>
+                                            {% if project.technologies %}
+                                            <div class="mt-2">
+                                                {% for tech in project.technologies %}
+                                                <span class="badge bg-info">{{ tech }}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Raw Text Section -->
+                    <div class="mt-4">
+                        <h5 class="border-bottom pb-2">Original Text</h5>
+                        <div class="border p-3 bg-light">
+                            <pre class="mb-0" style="white-space: pre-wrap;">{{ content.raw_text }}</pre>
+                        </div>
+                    </div>
+                {% else %}
+                    <div id="extractionContainer">
+                        <button id="extractFeatures" class="btn btn-primary mb-4">
+                            Extract Resume Features
+                        </button>
+                        
+                        <!-- Loading Spinner (hidden by default) -->
+                        <div id="loadingSpinner" class="text-center mb-4" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Extracting resume features... This may take a moment.</p>
+                        </div>
+
+                        <!-- Error Display -->
+                        <div id="extractionError" class="alert alert-danger mb-4" style="display: none;">
+                            <h5 class="alert-heading">Extraction Error</h5>
+                            <p id="errorMessage"></p>
+                            <div id="errorDetails" style="display: none;">
+                                <hr>
+                                <p class="mb-0"><strong>Technical Details:</strong></p>
+                                <pre id="errorDetailsText" class="mt-2" style="white-space: pre-wrap;"></pre>
+                            </div>
+                        </div>
+
+                        <div class="border p-3 bg-light">
+                            <pre class="mb-0" style="white-space: pre-wrap;">{{ content.raw_text }}</pre>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
     </div>
-  </div>
 
-  <div class="mt-3">
-    <a href="{% url 'accounts:dashboard' %}" class="btn btn-secondary"
-      >Back to Dashboard</a
-    >
-
-    {% if resume.status != 'processing' %}
-    <form
-      action="{% url 'resume_analysis:delete_resume' resume.file_id %}"
-      method="post"
-      class="d-inline"
-    >
-      {% csrf_token %}
-      <button
-        type="submit"
-        class="btn btn-danger"
-        onclick="return confirm('Are you sure you want to delete this resume?')"
-      >
-        Delete Resume
-      </button>
-    </form>
-    {% endif %}
-  </div>
+    <div class="mt-3">
+        <a href="{% url 'accounts:dashboard' %}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+        
+        {% if resume.status != 'processing' %}
+        <form action="{% url 'resume_analysis:delete_resume' resume.file_id %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this resume?')">
+                <i class="bi bi-trash"></i> Delete Resume
+            </button>
+        </form>
+        {% endif %}
+    </div>
 </div>
+
+{% if not features %}
+<script>
+async function fetchWithTimeout(resource, options = {}) {
+    const { timeout = 60000 } = options; // 60 seconds default timeout
+    
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    
+    try {
+        const response = await fetch(resource, {
+            ...options,
+            signal: controller.signal
+        });
+        clearTimeout(id);
+        return response;
+    } catch (error) {
+        clearTimeout(id);
+        throw error;
+    }
+}
+
+document.getElementById('extractFeatures')?.addEventListener('click', async function() {
+    const button = this;
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const errorDiv = document.getElementById('extractionError');
+    const errorMsg = document.getElementById('errorMessage');
+    const errorDetails = document.getElementById('errorDetails');
+    const errorDetailsText = document.getElementById('errorDetailsText');
+    
+    // Hide any previous error
+    errorDiv.style.display = 'none';
+    
+    // Show loading state
+    button.style.display = 'none';
+    loadingSpinner.style.display = 'block';
+    
+    try {
+        const response = await fetchWithTimeout(`{% url 'resume_analysis:extract_features' resume.file_id %}`, {
+            timeout: 60000 // 60 seconds timeout
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            // Show success message
+            loadingSpinner.innerHTML = `
+                <div class="alert alert-success">
+                    <i class="bi bi-check-circle"></i> Features extracted successfully! Refreshing page...
+                </div>
+            `;
+            
+            // Reload after a short delay
+            setTimeout(() => window.location.reload(), 1500);
+        } else {
+            // Show error message
+            errorMsg.textContent = data.error || 'Unknown error occurred';
+            
+            if (data.details || data.raw_response) {
+                let details = '';
+                if (data.details) details += `Error Details:\n${data.details}\n\n`;
+                if (data.raw_response) details += `API Response:\n${data.raw_response}`;
+                
+                errorDetailsText.textContent = details;
+                errorDetails.style.display = 'block';
+            } else {
+                errorDetails.style.display = 'none';
+            }
+            
+            errorDiv.style.display = 'block';
+            button.style.display = 'block';
+            loadingSpinner.style.display = 'none';
+            
+            errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        errorMsg.textContent = `An unexpected error occurred: ${error.message}`;
+        errorDiv.style.display = 'block';
+        errorDetails.style.display = 'none';
+        
+        button.style.display = 'block';
+        loadingSpinner.style.display = 'none';
+        
+        errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+});
+</script>
+{% endif %}
 {% endblock %}

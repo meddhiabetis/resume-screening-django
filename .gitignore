@@ -1,22 +1,28 @@
-# Ignore virtual environments
-.venv/
+# Virtual environment
+venv/
 env/
-
-# Ignore IDE/editor files
-.vscode/
-.idea/
-
-# Ignore compiled Python files
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Ignore database and credentials
-db.sqlite3
+# IDE settings
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Environment variables & credentials
 .env
 credentials.txt
 
-# Ignore media and generated files
-/media/
-staticfiles/
+# Database & migrations
+db.sqlite3
+*.sqlite3
+migrations/**/__pycache__/
+
+# Compiled files
+**/__pycache__/
+*.log
+
+# Media and uploads
+media/

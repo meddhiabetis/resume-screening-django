@@ -3,18 +3,16 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from apps.resume_analysis.models import Resume
 
 def home(request):
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        return redirect('accounts:dashboard')  # Updated
     return render(request, 'accounts/home.html')
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        return redirect('accounts:dashboard')  # Updated
     
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -22,7 +20,7 @@ def register(request):
             user = form.save()
             login(request, user)
             messages.success(request, 'Account created successfully!')
-            return redirect('dashboard')
+            return redirect('accounts:dashboard')  # Updated
     else:
         form = UserRegisterForm()
     return render(request, 'accounts/register.html', {'form': form})
@@ -56,7 +54,7 @@ def profile(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Profile updated successfully!')
-            return redirect('profile')
+            return redirect('accounts:profile')  # Updated
     else:
         form = UserUpdateForm(instance=request.user)
     

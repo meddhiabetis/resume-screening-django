@@ -4,14 +4,10 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
-          <h4 class="mb-0">Upload Resume</h4>
+          <h5 class="mb-0">Upload Resume</h5>
         </div>
         <div class="card-body">
-          <form
-            method="post"
-            action="{% url 'resume_analysis:upload_resume' %}"
-            enctype="multipart/form-data"
-          >
+          <form id="uploadForm" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
               <label for="resume" class="form-label">Choose Resume File</label>
@@ -24,11 +20,12 @@
                 required
               />
               <div class="form-text">
-                Supported formats: PDF, Word documents (DOC, DOCX), Images (JPG,
-                PNG, TIFF, BMP)
+                Supported formats: PDF, Word documents, and images
               </div>
             </div>
-            <button type="submit" class="btn btn-primary">Upload Resume</button>
+            <button type="submit" class="btn btn-primary" id="uploadButton">
+              Upload Resume
+            </button>
           </form>
         </div>
       </div>
@@ -37,9 +34,45 @@
 </div>
 
 <script>
-  // Ensure file input accepts all specified formats
-  document.getElementById("resume").addEventListener("click", function () {
-    this.accept = ".pdf,.doc,.docx,.jpg,.jpeg,.png,.tiff,.bmp";
-  });
+  document
+    .getElementById("uploadForm")
+    .addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const form = this;
+      const button = document.getElementById("uploadButton");
+      const originalButtonText = button.innerHTML;
+
+      // Disable button and show loading state
+      button.disabled = true;
+      button.innerHTML =
+        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Uploading...';
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(
+          "{% url 'resume_analysis:upload_resume' %}",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        const data = await response.json();
+
+        if (data.success) {
+          window.location.href = data.redirect_url;
+        } else {
+          alert(data.error || "An error occurred while uploading the resume.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while uploading the resume.");
+      } finally {
+        // Reset button state
+        button.disabled = false;
+        button.innerHTML = originalButtonText;
+      }
+    });
 </script>
 {% endblock %}

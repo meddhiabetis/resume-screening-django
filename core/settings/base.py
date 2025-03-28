@@ -114,8 +114,9 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Authentication
-LOGIN_REDIRECT_URL = 'dashboard'
-LOGIN_URL = 'login'
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'accounts:dashboard'
+LOGOUT_REDIRECT_URL = 'accounts:login'
 
 # File upload settings
 MAX_UPLOAD_SIZE = 5242880  # 5MB
@@ -134,3 +135,23 @@ MIN_EXTRACTED_TEXT_LENGTH = 100
 
 # Increase PDF processing timeout if needed
 PDF_PROCESSING_TIMEOUT = 300  # 5 minutes
+
+# Add Mistral API settings
+MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY')# Increase timeout for LLM processing
+LLM_PROCESSING_TIMEOUT = 60  # seconds
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'apps.resume_analysis': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}

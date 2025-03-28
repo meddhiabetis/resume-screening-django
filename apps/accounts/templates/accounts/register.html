@@ -15,6 +15,14 @@
             <div class="auth-form-container">
                 <h2 class="text-center mb-4">Register</h2>
                 
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
                 <form method="post">
                     {% csrf_token %}
                     {{ form|crispy }}
@@ -24,7 +32,7 @@
                 </form>
                 
                 <div class="text-center mt-3">
-                    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+                    <p>Already have an account? <a href="{% url 'accounts:login' %}">Login here</a></p>
                 </div>
             </div>
         </div>

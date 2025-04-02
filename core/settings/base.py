@@ -140,6 +140,10 @@ PDF_PROCESSING_TIMEOUT = 300  # 5 minutes
 MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY')
 LLM_PROCESSING_TIMEOUT = 60  # seconds
 
+PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
+PINECONE_ENVIRONMENT = os.getenv('PINECONE_ENVIRONMENT')
+PINECONE_INDEX = os.getenv('PINECONE_INDEX')
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

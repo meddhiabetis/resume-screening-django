@@ -11,6 +11,9 @@ from .services.document_processor import DocumentProcessor
 from .services.text_extractor import TextExtractor
 from .services.ocr_processor import OCRProcessor
 import logging
+from .services.pinecone_service import PineconeService
+from django.views.decorators.http import require_http_methods
+from .services.search_service import SearchService
 
 logger = logging.getLogger(__name__)
 
@@ -203,3 +206,35 @@ def extract_features(request, file_id):
             'error': f'Feature extraction failed: {str(e)}',
             'details': getattr(content, 'processing_error', None)
         }, status=500)
+        
+        
+@require_http_methods(["POST"])
+def search_similar_resumes(request):
+    try:
+        data = request.POST
+        query = data.get('query')
+        section_type = data.get('section_type', 'full_text')
+        limit = int(data.get('limit', 10))
+
+        if not query:
+            return JsonResponse({'error': 'Query is required'}, status=400)
+
+        search_service = SearchService()
+        results = search_service.search_similar_resumes(query, section_type, limit)
+
+        return render(request, 'accounts/dashboard.html', {'search_results': results})
+
+    except Exception as e:
+        return JsonResponse({
+            'success': False,
+            'error': str(e)
+        }, status=500)
+        
+def dashboard(request):
+    resumes = Resume.objects.all()
+    search_results = request.GET.get('search_results', None)
+
+    return render(request, 'accounts/dashboard.html', {
+        'resumes': resumes,
+        'search_results': search_results
+    })

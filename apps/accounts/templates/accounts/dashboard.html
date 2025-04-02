@@ -1,4 +1,7 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block content %}
 <div class="container mt-4">
   <div class="row mb-4">
     <div class="col">
@@ -8,6 +11,27 @@
       <a href="{% url 'resume_analysis:upload_form' %}" class="btn btn-primary">
         <i class="bi bi-upload"></i> Upload Resume
       </a>
+    </div>
+  </div>
+
+  <!-- Search Form -->
+  <div class="row mb-4">
+    <div class="col">
+      <form id="searchForm" method="POST" action="{% url 'resume_analysis:search_similar_resumes' %}">
+        {% csrf_token %}
+        <div class="input-group">
+          <input type="text" class="form-control" id="query" name="query" placeholder="Search resumes..." required>
+          <select class="form-control" id="section_type" name="section_type">
+            <option value="full_text">Full Text</option>
+            <option value="skills">Skills</option>
+            <option value="experience">Experience</option>
+            <option value="education">Education</option>
+            <option value="projects">Projects</option>
+          </select>
+          <input type="number" class="form-control" id="limit" name="limit" value="10" min="1">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+      </form>
     </div>
   </div>
 

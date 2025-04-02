@@ -9,4 +9,5 @@ urlpatterns = [
     path('view/<uuid:file_id>/', views.view_resume, name='view_resume'),
     path('delete/<uuid:file_id>/', views.delete_resume, name='delete_resume'),
     path('extract/<uuid:file_id>/', views.extract_features, name='extract_features'),
+    path('api/search/similar/', views.search_similar_resumes, name='search_similar_resumes'),
 ]

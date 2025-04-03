@@ -1,5 +1,5 @@
 import os
-from pinecone import Pinecone, ServerlessSpec
+from pinecone import Pinecone
 from sentence_transformers import SentenceTransformer
 from django.conf import settings
 from ..models import Resume
@@ -12,31 +12,28 @@ class PineconeService:
         self.api_key = settings.PINECONE_API_KEY
         self.environment = settings.PINECONE_ENVIRONMENT
         self.index_name = settings.PINECONE_INDEX
+        logger.info(f"Initializing PineconeService with index: {self.index_name}")
+        
+        # Use the locally downloaded model
         self.model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2')
         
-        # Initialize Pinecone
+        # Initialize Pinecone and connect to existing index
         self.pc = Pinecone(api_key=self.api_key)
-
-        # Check if index exists, otherwise create it
-        if self.index_name not in self.pc.list_indexes().names():
-            self.pc.create_index(
-                name=self.index_name,
-                dimension=384,
-                metric="cosine",  # Change metric if needed
-                spec=ServerlessSpec(cloud="aws", region="us-west-2")  # Adjust region if needed
-            )
         
-        # Connect to the index
+        # Just connect to the index - don't try to create or delete
         self.index = self.pc.Index(self.index_name)
-    
+        logger.info(f"Connected to existing Pinecone index: {self.index_name}")
+
     def create_vectors_for_resume(self, resume_id: str) -> None:
         """Create vectors for all sections of a resume"""
         try:
+            logger.info(f"Starting vector creation for resume: {resume_id}")
             resume = Resume.objects.get(file_id=resume_id)
             content = resume.resumecontent
             features = content.extracted_features
 
             # Create full text vector
+            logger.info(f"Creating full text vector for resume: {resume_id}")
             self._create_vector_for_section(
                 resume=resume,
                 section_type='full_text',
@@ -46,6 +43,7 @@ class PineconeService:
             if features:
                 # Skills vector
                 if 'skills' in features:
+                    logger.info(f"Creating skills vector for resume: {resume_id}")
                     skills_text = ' '.join([
                         ' '.join(features['skills'].get('technical', [])),
                         ' '.join(features['skills'].get('soft', []))
@@ -58,6 +56,7 @@ class PineconeService:
 
                 # Experience vector
                 if 'work_experience' in features:
+                    logger.info(f"Creating experience vector for resume: {resume_id}")
                     experience_text = ' '.join([
                         f"{exp.get('company', '')} {exp.get('title', '')} {' '.join(exp.get('responsibilities', []))}"
                         for exp in features['work_experience']
@@ -73,21 +72,62 @@ class PineconeService:
             raise
 
     def _create_vector_for_section(self, resume: Resume, section_type: str, content: str) -> None:
-        embedding = self.model.encode(content).tolist()
-        metadata = {
-            'resume_id': resume.file_id,
-            'section_type': section_type,
-            'content': content
-        }
-        self.index.upsert([(f"{resume.file_id}-{section_type}", embedding, metadata)])
+        try:
+            logger.info(f"Creating vector for section {section_type} of resume {resume.file_id}")
+            embedding = self.model.encode(content).tolist()
+            metadata = {
+                'resume_id': str(resume.file_id),
+                'section_type': section_type,
+                'content': content[:1000]  # Limit content length in metadata
+            }
+            vector_id = f"{resume.file_id}-{section_type}"
+            logger.info(f"Upserting vector with ID: {vector_id}")
+            self.index.upsert([(vector_id, embedding, metadata)])
+            logger.info(f"Successfully created vector for section {section_type} of resume {resume.file_id}")
+        except Exception as e:
+            logger.error(f"Error in _create_vector_for_section: {str(e)}")
+            raise
 
     def search_similar_resumes(self, query: str, section_type: str = 'full_text', limit: int = 10) -> list:
         """Search for similar resumes using Pinecone"""
         try:
+            logger.info(f"Searching resumes with query: '{query}', section_type: {section_type}")
             query_embedding = self.model.encode(query).tolist()
-            results = self.index.query(vector=query_embedding, top_k=limit, include_metadata=True)  # FIXED HERE
+            logger.info("Created query embedding, searching Pinecone...")
+            
+            # Add filter only if section_type is specified and not 'all'
+            filter_dict = {"section_type": section_type} if section_type not in ('all', '') else None
+            
+            results = self.index.query(
+                vector=query_embedding,
+                top_k=limit,
+                include_metadata=True,
+                filter=filter_dict
+            )
+            
+            logger.info(f"Search complete. Found {len(results['matches'])} matches")
+            for match in results['matches']:
+                logger.info(f"Match score: {match.score}, Resume ID: {match.metadata.get('resume_id')}")
+            
             return results['matches']
 
         except Exception as e:
             logger.error(f"Error searching similar resumes: {str(e)}")
             raise
+        
+
+    def delete_resume_vectors(self, resume_id: str) -> bool:
+        """Delete all vectors associated with a resume"""
+        try:
+            logger.info(f"Deleting vectors for resume: {resume_id}")
+            vector_ids = [
+                f"{resume_id}-full_text",
+                f"{resume_id}-skills",
+                f"{resume_id}-experience"
+            ]
+            self.index.delete(ids=vector_ids)
+            logger.info(f"Successfully deleted vectors for resume: {resume_id}")
+            return True
+        except Exception as e:
+            logger.error(f"Error deleting vectors for resume {resume_id}: {str(e)}")
+            raise        

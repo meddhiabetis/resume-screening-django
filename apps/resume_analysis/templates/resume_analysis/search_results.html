@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Search Form -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="POST" action="{% url 'resume_analysis:search_similar_resumes' %}" id="searchForm">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="query" class="form-control" placeholder="Enter search query" value="{{ query }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <select name="section_type" class="form-control">
+                            <option value="full_text" {% if section_type == 'full_text' %}selected{% endif %}>Full Text</option>
+                            <option value="skills" {% if section_type == 'skills' %}selected{% endif %}>Skills</option>
+                            <option value="experience" {% if section_type == 'experience' %}selected{% endif %}>Experience</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Search Results -->
+    {% if results %}
+        <h3>Search Results</h3>
+        <p class="text-muted">Found {{ results|length }} results for "{{ query }}"</p>
+        
+        {% for result in results %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <h5 class="card-title">
+                        Resume ID: {{ result.resume_id|truncatechars:8 }}...
+                    </h5>
+                    <span class="badge bg-primary">
+                        Match Score: {{ result.score|floatformat:2 }}
+                    </span>
+                </div>
+                
+                <div class="mt-2">
+                    <h6 class="text-muted">Section: {{ result.section_type|title }}</h6>
+                    <div class="content-preview">
+                        {{ result.content|linebreaks }}
+                    </div>
+                </div>
+                
+                <div class="mt-3">
+                    <a href="{% url 'resume_analysis:view_resume' result.resume_id %}" 
+                       class="btn btn-outline-primary btn-sm">
+                        View Full Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        {% if query %}
+        <div class="alert alert-info">
+            No results found for "{{ query }}" in section "{{ section_type }}".
+        </div>
+        {% endif %}
+    {% endif %}
+</div>
+
+<style>
+.content-preview {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    font-family: monospace;
+    white-space: pre-wrap;
+    max-height: 200px;
+    overflow-y: auto;
+}
+.badge {
+    font-size: 0.9em;
+}
+</style>
+{% endblock %}

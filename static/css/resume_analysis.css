@@ -1,0 +1,19 @@
+.search-result {
+    transition: all 0.3s ease;
+}
+
+.search-result:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.content-preview {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.match-score {
+    font-size: 0.8em;
+    font-weight: bold;
+}

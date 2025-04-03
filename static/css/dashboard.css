@@ -1,0 +1,228 @@
+/* Dashboard Layout */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Header Styles */
+.dashboard-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* Upload Section */
+.upload-section {
+    background: linear-gradient(to right bottom, #ffffff, #f8f9fa);
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    display: none;
+}
+
+.upload-section .card-header {
+    background: linear-gradient(to right, #0d6efd, #0b5ed7);
+    padding: 1rem 1.5rem;
+}
+
+.border-dashed {
+    border-style: dashed !important;
+    border-width: 2px !important;
+    border-color: #dee2e6 !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease;
+}
+
+.upload-area {
+    position: relative;
+}
+
+.drag-over {
+    background-color: rgba(13, 110, 253, 0.05);
+    border-color: #0d6efd !important;
+    transform: scale(1.01);
+}
+
+/* File Items */
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin: 8px 0;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.file-item:hover {
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    gap: 12px;
+}
+
+.upload-icon {
+    height: 80px;
+    width: 80px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(13, 110, 253, 0.1);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.upload-icon:hover {
+    transform: scale(1.05);
+    background: rgba(13, 110, 253, 0.15);
+}
+
+/* Search Section */
+.search-section {
+    margin-bottom: 2rem;
+}
+
+.search-section .card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+}
+
+.search-section .input-group {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.search-section .form-control,
+.search-section .form-select {
+    border: none;
+    padding: 0.75rem 1rem;
+}
+
+.search-section .input-group-text {
+    border: none;
+    background-color: transparent;
+}
+
+/* Table Styles */
+.resumes-table {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table-responsive {
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+
+.table-responsive::-webkit-scrollbar {
+    width: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    padding: 1rem;
+    border: none;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.table td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.table tr:hover {
+    background-color: rgba(13, 110, 253, 0.02);
+}
+
+/* Animations */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes highlight {
+    0% {
+        background-color: rgba(13, 202, 240, 0.2);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+.table-info {
+    animation: highlight 2s ease-out;
+}
+
+.upload-section.show {
+    animation: slideDown 0.3s ease-out;
+}
+
+/* Status Badges */
+.badge {
+    padding: 0.5em 1em;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    border-radius: 6px;
+}
+
+/* Action Buttons */
+.btn-group .btn {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+}
+
+.btn-group .btn:not(:last-child) {
+    margin-right: 0.25rem;
+}
+
+/* Empty State */
+.empty-state {
+    padding: 3rem;
+    text-align: center;
+    color: #6c757d;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}

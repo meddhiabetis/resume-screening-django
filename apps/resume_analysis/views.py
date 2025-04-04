@@ -6,6 +6,7 @@ from django.core.files.storage import default_storage
 from django.conf import settings
 from django.urls import reverse
 import os
+from .services.neo4j_service import Neo4jService
 from .models import Resume, ResumeContent
 from .services.document_processor import DocumentProcessor
 from .services.text_extractor import TextExtractor
@@ -14,6 +15,8 @@ import logging
 from .services.pinecone_service import PineconeService
 from django.views.decorators.http import require_http_methods
 from .services.search_service import SearchService
+from .services.hybrid_rag_service import HybridRAGService
+import datetime 
 
 logger = logging.getLogger(__name__)
 
@@ -43,31 +46,100 @@ def process_resume(file_obj, resume):
             content = ResumeContent.objects.create(
                 resume=resume,
                 raw_text=extracted_text,
-                structured_data={}
+                structured_data={},
+                upload_date=datetime.datetime.utcnow(),
+                uploaded_by=resume.user.username
             )
 
-            # Automatically extract features
-            logger.info(f"Automatically extracting features for resume: {resume.file_id}")
+            # Extract features with retries
+            logger.info(f"Processing resume {resume.file_id} for hybrid search")
             try:
-                features = content.extract_features()
-                logger.info(f"Features extracted successfully for resume: {resume.file_id}")
+                # Extract features
+                extracted_data = content.extract_features()
+
+                if "error" in extracted_data:
+                    logger.warning(f"Partial feature extraction for {resume.file_id}: {extracted_data['error']}")
+                    # Continue with partial processing
+                    basic_features = {
+                        'skills': {'technical': [], 'soft': []},
+                        'work_experience': [],
+                        'education': []
+                    }
+                    extracted_data = basic_features
+
+                # Create vectors for Pinecone
+                try:
+                    pinecone_service = PineconeService()
+                    vector_id = pinecone_service.create_vectors_for_resume(
+                        resume_id=str(resume.file_id)
+                    )
+                    logger.info(f"Vectors created successfully for resume: {resume.file_id}")
+                except Exception as vector_error:
+                    logger.error(f"Error creating vectors: {str(vector_error)}")
+                    vector_id = None
+
+                # Add to Neo4j graph database
+                try:
+                    neo4j_service = Neo4jService()
+                    
+                    # Process skills
+                    skills = []
+                    if extracted_data.get('skills'):
+                        # Process technical skills
+                        for skill in extracted_data['skills'].get('technical', []):
+                            if skill and isinstance(skill, str):
+                                skills.append({
+                                    'name': skill.lower().strip(),
+                                    'category': 'technical',
+                                    'confidence': 1.0
+                                })
+                        
+                        # Process soft skills
+                        for skill in extracted_data['skills'].get('soft', []):
+                            if skill and isinstance(skill, str):
+                                skills.append({
+                                    'name': skill.lower().strip(),
+                                    'category': 'soft',
+                                    'confidence': 1.0
+                                })
+
+                    # Prepare resume data
+                    resume_data = {
+                        'id': str(resume.file_id),
+                        'file_name': resume.original_filename,
+                        'vector_id': vector_id,
+                        'user_id': str(resume.user.id),
+                        'metadata': {
+                            'file_path': saved_path,
+                            'processed_date': datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'),
+                            'status': resume.status,
+                            'uploaded_by': resume.user.username
+                        },
+                        'skills': skills
+                    }
+
+                    # Create or update in Neo4j
+                    neo4j_service.create_or_update_resume(resume_data)
+                    logger.info(f"Resume added to graph database: {resume.file_id}")
+
+                except Exception as graph_error:
+                    logger.error(f"Error adding to graph database: {str(graph_error)}")
+                    # Continue processing even if graph storage fails
+
+                # Update resume status
+                if vector_id or skills:
+                    resume.status = 'processed'
+                else:
+                    resume.status = 'partial'
+                resume.save()
+
+                return content
+
             except Exception as feature_error:
                 logger.error(f"Error extracting features: {str(feature_error)}")
-                # Continue even if feature extraction fails
-                features = None
-
-            resume.status = 'processed'
-            resume.save()
-
-            # Create vectors for search
-            try:
-                pinecone_service = PineconeService()
-                pinecone_service.create_vectors_for_resume(str(resume.file_id))
-                logger.info(f"Vectors created successfully for resume: {resume.file_id}")
-            except Exception as vector_error:
-                logger.error(f"Error creating vectors: {str(vector_error)}")
-            
-            return content
+                resume.status = 'failed'
+                resume.save()
+                return None
 
         except Exception as processing_error:
             logger.error(f"Error processing file {file_obj.name}: {str(processing_error)}")
@@ -77,7 +149,9 @@ def process_resume(file_obj, resume):
             content = ResumeContent.objects.create(
                 resume=resume,
                 raw_text="Error processing document. Please ensure the file contains readable text.",
-                structured_data={'error': str(processing_error)}
+                structured_data={'error': str(processing_error)},
+                upload_date=datetime.datetime.utcnow(),
+                uploaded_by=resume.user.username
             )
             
             return None
@@ -88,6 +162,8 @@ def process_resume(file_obj, resume):
             resume.status = 'failed'
             resume.save()
         return None
+    
+    
 @login_required
 def upload_form(request):
     return render(request, 'resume_analysis/upload_form.html')
@@ -169,6 +245,14 @@ def delete_resume(request, file_id):
             pinecone_service = PineconeService()
             pinecone_service.delete_resume_vectors(str(resume.file_id))
             
+            # Delete from Neo4j
+            try:
+                from .services.neo4j_service import Neo4jService
+                neo4j_service = Neo4jService()
+                neo4j_service.delete_resume(str(resume.file_id))
+            except Exception as graph_error:
+                logger.error(f"Error deleting from Neo4j: {str(graph_error)}")
+            
             # Delete file from storage
             file_path = os.path.join('resumes', str(resume.file_id), resume.original_filename)
             if default_storage.exists(file_path):
@@ -176,7 +260,7 @@ def delete_resume(request, file_id):
             
             # Delete database record
             resume.delete()
-            messages.success(request, 'Resume and associated vectors deleted successfully')
+            messages.success(request, 'Resume deleted successfully from all systems')
             
         except Exception as e:
             logger.error(f"Error deleting resume {file_id}: {str(e)}")
@@ -213,58 +297,136 @@ def extract_features(request, file_id):
             'error': f'Feature extraction failed: {str(e)}',
             'details': getattr(content, 'processing_error', None)
         }, status=500)
-        
-@require_http_methods(["GET", "POST"])
 def search_similar_resumes(request):
+    """Search resumes using hybrid approach"""
     try:
-        if request.method == "POST":
-            query = request.POST.get('query')
-            section_type = request.POST.get('section_type', 'full_text')
-            limit = int(request.POST.get('limit', 10))
-        else:
-            query = request.GET.get('query')
-            section_type = request.GET.get('section_type', 'full_text')
-            limit = int(request.GET.get('limit', 10))
-
-        logger.info(f"Received search request - Query: {query}, Section: {section_type}")
-
+        query = request.GET.get('query', '')
+        search_type = request.GET.get('search_type', 'hybrid')
+        
         if not query:
             return render(request, 'resume_analysis/search_results.html', {
                 'results': [],
                 'query': '',
-                'section_type': section_type
+                'search_type': search_type
             })
 
-        search_service = SearchService()
-        results = search_service.search_similar_resumes(query, section_type, limit)
+        results = []
+        pinecone_service = PineconeService()
+        neo4j_service = Neo4jService()
 
-        logger.info(f"Search completed - Found {len(results)} results")
+        if search_type in ['vector', 'hybrid']:
+            # Get vector search results
+            vector_results = pinecone_service.search_similar_resumes(
+                query=query,
+                section_type='full_text',
+                limit=10
+            )
 
-        # Transform results for template rendering
-        processed_results = []
-        for match in results:
-            metadata = match.metadata
-            processed_results.append({
-                'resume_id': metadata.get('resume_id'),
-                'score': float(match.score),
-                'content': metadata.get('content', '')[:500],
-                'section_type': metadata.get('section_type')
-            })
+            # Process vector results
+            for match in vector_results:
+                try:
+                    resume_id = match.metadata.get('resume_id')
+                    resume = Resume.objects.get(file_id=resume_id)
+                    
+                    result = {
+                        'resume_id': resume_id,
+                        'file_name': resume.original_filename,
+                        'vector_score': float(match.score),
+                        'graph_score': 0.0,
+                        'combined_score': float(match.score),
+                        'matching_skills': [],
+                        'search_type': 'vector'
+                    }
+                    results.append(result)
+                except Resume.DoesNotExist:
+                    continue
+
+        if search_type in ['graph', 'hybrid'] and results:
+            # Use the top vector result as seed for graph search
+            seed_resume_id = results[0]['resume_id']
+            logger.info(f"Using resume {seed_resume_id} as seed for graph search")
+            
+            graph_results = neo4j_service.find_similar_resumes(
+                resume_id=seed_resume_id,
+                min_skill_match=2,
+                limit=10
+            )
+
+            if search_type == 'graph':
+                results = []  # Clear vector results if only graph search is requested
+
+            # Process graph results
+            for graph_result in graph_results:
+                resume_id = graph_result['resume_id']
+                try:
+                    resume = Resume.objects.get(file_id=resume_id)
+                    
+                    # Check if this resume is already in results
+                    existing_result = next(
+                        (r for r in results if r['resume_id'] == resume_id),
+                        None
+                    )
+
+                    if existing_result:
+                        # Update existing result with graph information
+                        existing_result['graph_score'] = float(graph_result['similarity_score'])
+                        existing_result['matching_skills'] = graph_result.get('shared_skills', [])
+                        if search_type == 'hybrid':
+                            # Both scores are now normalized between 0 and 1
+                            vector_weight = 0.6
+                            graph_weight = 0.4
+                            existing_result['combined_score'] = (
+                                existing_result['vector_score'] * vector_weight +
+                                existing_result['graph_score'] * graph_weight
+                            )
+                    else:
+                        # Add new graph result
+                        results.append({
+                            'resume_id': resume_id,
+                            'file_name': resume.original_filename,
+                            'vector_score': 0.0,
+                            'graph_score': float(graph_result['similarity_score']),
+                            'combined_score': float(graph_result['similarity_score']) * 0.4,  # Apply graph weight
+                            'matching_skills': graph_result.get('shared_skills', []),
+                            'search_type': 'graph'
+                        })
+                except Resume.DoesNotExist:
+                    continue
+
+        # Sort results
+        if search_type == 'hybrid':
+            results.sort(key=lambda x: x['combined_score'], reverse=True)
+        elif search_type == 'vector':
+            results.sort(key=lambda x: x['vector_score'], reverse=True)
+        else:  # graph
+            results.sort(key=lambda x: x['graph_score'], reverse=True)
+
+        # Add debug information
+        for result in results:
+            result['debug_info'] = {
+                'search_type': search_type,
+                'vector_score': f"{result['vector_score']:.3f}",
+                'graph_score': f"{result['graph_score']:.3f}",
+                'combined_score': f"{result['combined_score']:.3f}",
+                'num_matching_skills': len(result.get('matching_skills', []))
+            }
+
+        logger.info(f"Search type: {search_type}")
+        logger.info(f"Number of results: {len(results)}")
+        logger.info(f"Top result scores: {[r['debug_info'] for r in results[:3]]}")
 
         return render(request, 'resume_analysis/search_results.html', {
-            'results': processed_results,
+            'results': results,
             'query': query,
-            'section_type': section_type
+            'search_type': search_type,
+            'debug': True  # Add this to show debug information in template
         })
 
     except Exception as e:
         logger.error(f"Error in search_similar_resumes: {str(e)}")
-        return render(request, 'resume_analysis/search_results.html', {
-            'error': str(e),
-            'query': query if 'query' in locals() else '',
-            'section_type': section_type if 'section_type' in locals() else 'full_text'
-        })
-        
+        messages.error(request, f"Search error: {str(e)}")
+        return redirect('accounts:dashboard')
+    
 def dashboard(request):
     resumes = Resume.objects.all()
     search_results = request.GET.get('search_results', None)

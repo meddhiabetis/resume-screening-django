@@ -144,6 +144,12 @@ PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
 PINECONE_ENVIRONMENT = os.getenv('PINECONE_ENVIRONMENT')
 PINECONE_INDEX = os.getenv('PINECONE_INDEX')
 
+# Neo4j settings
+NEO4J_URI = os.getenv('NEO4J_URI')
+NEO4J_USER = os.getenv('NEO4J_USER')
+NEO4J_PASSWORD = os.getenv('NEO4J_PASSWORD')
+NEO4J_DATABASE = os.getenv('NEO4J_DATABASE')
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

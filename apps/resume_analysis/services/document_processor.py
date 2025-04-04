@@ -1,51 +1,88 @@
-import logging
+from .text_extractor import TextExtractor
 from .pinecone_service import PineconeService
-from django.core.files.storage import default_storage
-import os
+from .neo4j_service import Neo4jService
+import logging
+from typing import Dict, Any
+import uuid
 
 logger = logging.getLogger(__name__)
 
 class DocumentProcessor:
     def __init__(self):
-        self.upload_path = 'resumes'
+        self.text_extractor = TextExtractor()
         self.pinecone_service = PineconeService()
+        self.neo4j_service = Neo4jService()
 
-    def save_document(self, file, file_id):
-        """Save the uploaded document to storage and process vectors"""
+    def process_resume(self, file_path: str, user_id: str, original_filename: str) -> Dict[str, Any]:
+        """Process a resume and store in both vector and graph databases"""
         try:
-            file_path = os.path.join(self.upload_path, str(file_id), file.name)
-            saved_path = default_storage.save(file_path, file)
+            # Extract text and structured data
+            extracted_data = self.text_extractor.extract(file_path)
             
-            try:
-                self.pinecone_service.create_vectors_for_resume(file_id)
-            except Exception as vector_error:
-                logger.error(f"Vector generation failed for file_id {file_id}: {str(vector_error)}")
+            # Generate unique ID for the resume
+            resume_id = str(uuid.uuid4())
             
-            return saved_path
-        except Exception as e:
-            logger.error(f"Error saving document: {str(e)}")
-            raise Exception(f"Error saving document: {str(e)}")
+            # Create vector embedding and store in Pinecone
+            vector_id = self.pinecone_service.store_resume(
+                text=extracted_data['full_text'],
+                metadata={
+                    'resume_id': resume_id,
+                    'file_name': original_filename,
+                    'user_id': user_id,
+                    'skills': extracted_data.get('skills', []),
+                    'companies': [exp['company'] for exp in extracted_data.get('experiences', [])]
+                }
+            )
 
-    def get_document(self, file_id):
-        """Retrieve a document from storage"""
-        try:
-            file_path = os.path.join(self.upload_path, str(file_id))
-            return default_storage.open(file_path).read()
-        except Exception as e:
-            logger.error(f"Error retrieving document {file_id}: {str(e)}")
-            raise Exception(f"Error retrieving document: {str(e)}")
+            # Store in Neo4j
+            resume_data = {
+                'id': resume_id,
+                'file_name': original_filename,
+                'vector_id': vector_id,
+                'user_id': user_id,
+                'metadata': {
+                    'file_path': file_path,
+                    'processed_date': extracted_data.get('processed_date'),
+                    'language': extracted_data.get('language'),
+                },
+                'skills': [
+                    {
+                        'name': skill,
+                        'category': self._categorize_skill(skill),
+                        'confidence': 1.0  # You can implement confidence scoring
+                    }
+                    for skill in extracted_data.get('skills', [])
+                ],
+                'experiences': extracted_data.get('experiences', []),
+                'education': extracted_data.get('education', [])
+            }
 
-    def delete_document(self, file_id):
-        """Delete a document from storage and its associated vectors"""
-        try:
-            try:
-                self.pinecone_service.index.delete(ids=[file_id])
-            except Exception as vector_error:
-                logger.error(f"Error deleting vectors for file_id {file_id}: {str(vector_error)}")
+            self.neo4j_service.create_or_update_resume(resume_data)
 
-            file_path = os.path.join(self.upload_path, str(file_id))
-            if default_storage.exists(file_path):
-                default_storage.delete(file_path)
+            return {
+                'resume_id': resume_id,
+                'vector_id': vector_id,
+                'extracted_data': extracted_data
+            }
+
         except Exception as e:
-            logger.error(f"Error deleting document {file_id}: {str(e)}")
-            raise Exception(f"Error deleting document: {str(e)}")
+            logger.error(f"Error processing resume: {str(e)}")
+            raise
+
+    def _categorize_skill(self, skill: str) -> str:
+        """Categorize skills into predefined categories"""
+        # Implement your skill categorization logic here
+        # This is a simple example - you should expand this
+        skill = skill.lower()
+        categories = {
+            'programming': ['python', 'java', 'javascript', 'c++', 'ruby'],
+            'database': ['sql', 'mongodb', 'postgresql', 'mysql', 'neo4j'],
+            'framework': ['django', 'flask', 'react', 'angular', 'vue'],
+            'cloud': ['aws', 'azure', 'gcp', 'docker', 'kubernetes'],
+            'tools': ['git', 'jenkins', 'jira', 'confluence', 'bitbucket']
+        }
+
+        for category, skills in categories.items():
+            if skill in skills:
+                return category
+        return 'other'

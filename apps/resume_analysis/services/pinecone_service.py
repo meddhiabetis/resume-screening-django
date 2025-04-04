@@ -23,66 +23,82 @@ class PineconeService:
         # Just connect to the index - don't try to create or delete
         self.index = self.pc.Index(self.index_name)
         logger.info(f"Connected to existing Pinecone index: {self.index_name}")
-
-    def create_vectors_for_resume(self, resume_id: str) -> None:
+    def create_vectors_for_resume(self, resume_id: str) -> str:
         """Create vectors for all sections of a resume"""
         try:
             logger.info(f"Starting vector creation for resume: {resume_id}")
             resume = Resume.objects.get(file_id=resume_id)
             content = resume.resumecontent
-            features = content.extracted_features
+            features = content.extracted_features or {}  # Default to empty dict if None
 
             # Create full text vector
             logger.info(f"Creating full text vector for resume: {resume_id}")
+            skills = []
+            if features.get('skills'):
+                skills = (
+                    features['skills'].get('technical', []) +
+                    features['skills'].get('soft', [])
+                )
+
             self._create_vector_for_section(
                 resume=resume,
                 section_type='full_text',
-                content=content.raw_text
+                content=content.raw_text,
+                metadata={
+                    'resume_id': str(resume.file_id),
+                    'file_name': resume.original_filename,
+                    'section_type': 'full_text',
+                    'skills': skills
+                }
             )
 
-            if features:
-                # Skills vector
-                if 'skills' in features:
-                    logger.info(f"Creating skills vector for resume: {resume_id}")
-                    skills_text = ' '.join([
-                        ' '.join(features['skills'].get('technical', [])),
-                        ' '.join(features['skills'].get('soft', []))
-                    ])
+            # Only create skills vector if we have skills data
+            if features.get('skills'):
+                logger.info(f"Creating skills vector for resume: {resume_id}")
+                skills_text = ' '.join([
+                    ' '.join(features['skills'].get('technical', [])),
+                    ' '.join(features['skills'].get('soft', []))
+                ]).strip()
+                
+                if skills_text:  # Only create skills vector if we have skills text
                     self._create_vector_for_section(
                         resume=resume,
                         section_type='skills',
-                        content=skills_text
+                        content=skills_text,
+                        metadata={
+                            'resume_id': str(resume.file_id),
+                            'file_name': resume.original_filename,
+                            'section_type': 'skills',
+                            'skills': skills
+                        }
                     )
 
-                # Experience vector
-                if 'work_experience' in features:
-                    logger.info(f"Creating experience vector for resume: {resume_id}")
-                    experience_text = ' '.join([
-                        f"{exp.get('company', '')} {exp.get('title', '')} {' '.join(exp.get('responsibilities', []))}"
-                        for exp in features['work_experience']
-                    ])
-                    self._create_vector_for_section(
-                        resume=resume,
-                        section_type='experience',
-                        content=experience_text
-                    )
+            return f"{resume_id}-full_text"  # Return the main vector ID
 
         except Exception as e:
             logger.error(f"Error creating vectors for resume {resume_id}: {str(e)}")
             raise
 
-    def _create_vector_for_section(self, resume: Resume, section_type: str, content: str) -> None:
+    def _create_vector_for_section(self, resume: Resume, section_type: str, content: str, metadata: dict = None) -> None:
+        """Create a vector for a specific section of a resume"""
         try:
             logger.info(f"Creating vector for section {section_type} of resume {resume.file_id}")
             embedding = self.model.encode(content).tolist()
-            metadata = {
+            
+            # Prepare metadata
+            base_metadata = {
                 'resume_id': str(resume.file_id),
                 'section_type': section_type,
                 'content': content[:1000]  # Limit content length in metadata
             }
+            
+            # Update with additional metadata if provided
+            if metadata:
+                base_metadata.update(metadata)
+            
             vector_id = f"{resume.file_id}-{section_type}"
             logger.info(f"Upserting vector with ID: {vector_id}")
-            self.index.upsert([(vector_id, embedding, metadata)])
+            self.index.upsert([(vector_id, embedding, base_metadata)])
             logger.info(f"Successfully created vector for section {section_type} of resume {resume.file_id}")
         except Exception as e:
             logger.error(f"Error in _create_vector_for_section: {str(e)}")

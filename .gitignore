@@ -1,34 +1,48 @@
-# Virtual environment
-venv/
-env/
+# Python cache files
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
 *.pyo
 *.pyd
-
-# IDE settings
-.vscode/
-.idea/
-*.sublime-workspace
-
-# Environment variables & credentials
-.env
-credentials.txt
-
-# Database & migrations
-db.sqlite3
-*.sqlite3
-migrations/**/__pycache__/
-
-# Compiled files
-**/__pycache__/
-*.log
-
-# Media and uploads
-media/
-
-# Python
 .Python
+pythonenv*
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+static/admin/
+*.pot
+*.mo
+
+# Development environment
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+ENV/
+env/
+.python-version
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# Distribution / packaging
 build/
 develop-eggs/
 dist/
@@ -41,21 +55,32 @@ parts/
 sdist/
 var/
 wheels/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# Django
-local_settings.py
-db.sqlite3-journal
-staticfiles/
+# Testing
+.coverage
+.tox/
+.pytest_cache/
+htmlcov/
+.hypothesis/
 
-# Virtual Environment
-ENV/
-.venv/
+# Project specific
+media/
+uploads/
+credentials.txt
+setup_project.sh
 
-# IDE
+# Migrations
+**/migrations/__pycache__/
+**/migrations/*.py[cod]
+
+# Operating System
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
 *.swp
-*.swo
-*~
-.env

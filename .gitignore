@@ -14,11 +14,16 @@ pythonenv*
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-media/
 staticfiles/
 static/admin/
 *.pot
 *.mo
+
+# Media files and uploads
+media/
+media/**/*
+uploads/
+resumes/
 
 # Development environment
 .env
@@ -69,10 +74,9 @@ htmlcov/
 .hypothesis/
 
 # Project specific
-media/
-uploads/
 credentials.txt
 setup_project.sh
+clean_cache.sh
 
 # Migrations
 **/migrations/__pycache__/

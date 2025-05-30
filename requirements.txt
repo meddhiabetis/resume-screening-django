@@ -1,0 +1,45 @@
+# Web Framework
+Django==5.1.6
+django-environ>=0.10.0
+django-crispy-forms==2.3
+crispy-bootstrap5==2024.10
+
+# Database
+psycopg2-binary==2.9.9
+
+# PDF Processing
+pdfminer.six==20231228
+python-magic==0.4.27
+pdf2image==1.17.0
+
+# OCR
+pytesseract==0.3.13
+Pillow==11.1.0
+
+# Vector Database
+pinecone-client==2.2.2
+# Graph Database
+neo4j==5.28.1
+
+# Text Processing & ML
+nltk==3.9.1
+scikit-learn==1.6.1
+sentence-transformers==2.2.2
+spacy==3.8.4
+
+# File Storage
+django-storages>=1.13.2 
+boto3==1.37.26
+
+# Utilities
+python-dateutil==2.9.0.post0
+tqdm==4.67.1
+
+# Development & Testing
+pytest==8.3.4
+pytest-django==4.9.0
+black==25.1.0
+flake8==7.1.1
+coverage>=7.2.3  
+
+

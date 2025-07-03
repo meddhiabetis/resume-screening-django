@@ -1,11 +1,20 @@
-from django.db import models
-from django.contrib.auth.models import User
-import uuid
-from .services.llm_processor import LLMProcessor
 import datetime
-
+import uuid
+from django.contrib.auth.models import User
+from django.db import models
+from .services.llm_processor import LLMProcessor
 
 class Resume(models.Model):
+    """
+    Model representing a resume uploaded by a user.
+
+    Attributes:
+        file_id (UUIDField): Unique identifier for the resume.
+        user (ForeignKey): The user who uploaded the resume.
+        original_filename (CharField): The original filename of the uploaded resume.
+        upload_date (DateTimeField): The date and time when the resume was uploaded.
+        status (CharField): The processing status of the resume.
+    """
     STATUS_CHOICES = [
         ("processing", "Processing"),
         ("processed", "Processed"),
@@ -26,10 +35,24 @@ class Resume(models.Model):
         verbose_name_plural = "Resumes"
 
     def __str__(self):
+        """Return a string representation of the resume."""
         return f"{self.original_filename} ({self.status})"
 
 
 class ResumeContent(models.Model):
+    """
+    Model representing the content of a resume.
+
+    Attributes:
+        resume (OneToOneField): The associated resume.
+        raw_text (TextField): The raw text extracted from the resume.
+        structured_data (JSONField): Structured data extracted from the resume.
+        extracted_features (JSONField): Features extracted from the resume.
+        last_processed (DateTimeField): The date and time when the resume was last processed.
+        processing_error (TextField): Any error encountered during processing.
+        upload_date (DateTimeField): The date and time when the content was uploaded.
+        uploaded_by (CharField): The name of the user who uploaded the content.
+    """
     resume = models.OneToOneField(Resume, on_delete=models.CASCADE, primary_key=True)
     raw_text = models.TextField()
     structured_data = models.JSONField(default=dict)
@@ -45,7 +68,15 @@ class ResumeContent(models.Model):
         verbose_name_plural = "Resume Contents"
 
     def extract_features(self):
-        """Extract features using LLM with retries"""
+        """
+        Extract features from the resume using an LLM processor with retries.
+
+        Raises:
+            Exception: If an error occurs during feature extraction.
+        
+        Returns:
+            dict: The extracted features from the resume.
+        """
         try:
             processor = LLMProcessor()
             features = processor.extract_resume_features(self.raw_text, max_retries=3)

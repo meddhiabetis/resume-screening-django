@@ -1,14 +1,21 @@
+import logging
 import os
+from django.conf import settings
 from pinecone import Pinecone
 from sentence_transformers import SentenceTransformer
-from django.conf import settings
 from ..models import Resume
-import logging
 
 logger = logging.getLogger(__name__)
 
 class PineconeService:
+    """Service for managing resume vectors in Pinecone.
+
+    This class handles the creation, searching, and deletion of vectors
+    associated with resumes using the Pinecone vector database.
+    """
+
     def __init__(self):
+        """Initialize the PineconeService with API key, environment, and index name."""
         self.api_key = settings.PINECONE_API_KEY
         self.environment = settings.PINECONE_ENVIRONMENT
         self.index_name = settings.PINECONE_INDEX
@@ -19,12 +26,18 @@ class PineconeService:
         
         # Initialize Pinecone and connect to existing index
         self.pc = Pinecone(api_key=self.api_key)
-        
-        # Just connect to the index - don't try to create or delete
         self.index = self.pc.Index(self.index_name)
         logger.info(f"Connected to existing Pinecone index: {self.index_name}")
+
     def create_vectors_for_resume(self, resume_id: str) -> str:
-        """Create vectors for all sections of a resume"""
+        """Create vectors for all sections of a resume.
+
+        Args:
+            resume_id (str): The ID of the resume to create vectors for.
+
+        Returns:
+            str: The ID of the created full text vector.
+        """
         try:
             logger.info(f"Starting vector creation for resume: {resume_id}")
             resume = Resume.objects.get(file_id=resume_id)
@@ -80,7 +93,14 @@ class PineconeService:
             raise
 
     def _create_vector_for_section(self, resume: Resume, section_type: str, content: str, metadata: dict = None) -> None:
-        """Create a vector for a specific section of a resume"""
+        """Create a vector for a specific section of a resume.
+
+        Args:
+            resume (Resume): The resume object.
+            section_type (str): The type of section (e.g., 'full_text', 'skills').
+            content (str): The content to encode into a vector.
+            metadata (dict, optional): Additional metadata to associate with the vector.
+        """
         try:
             logger.info(f"Creating vector for section {section_type} of resume {resume.file_id}")
             embedding = self.model.encode(content).tolist()
@@ -105,7 +125,16 @@ class PineconeService:
             raise
 
     def search_similar_resumes(self, query: str, section_type: str = 'full_text', limit: int = 10) -> list:
-        """Search for similar resumes using Pinecone"""
+        """Search for similar resumes using Pinecone.
+
+        Args:
+            query (str): The search query to find similar resumes.
+            section_type (str, optional): The section type to filter by (default is 'full_text').
+            limit (int, optional): The maximum number of results to return (default is 10).
+
+        Returns:
+            list: A list of matching resumes.
+        """
         try:
             logger.info(f"Searching resumes with query: '{query}', section_type: {section_type}")
             query_embedding = self.model.encode(query).tolist()
@@ -130,10 +159,16 @@ class PineconeService:
         except Exception as e:
             logger.error(f"Error searching similar resumes: {str(e)}")
             raise
-        
 
     def delete_resume_vectors(self, resume_id: str) -> bool:
-        """Delete all vectors associated with a resume"""
+        """Delete all vectors associated with a resume.
+
+        Args:
+            resume_id (str): The ID of the resume whose vectors are to be deleted.
+
+        Returns:
+            bool: True if deletion was successful, False otherwise.
+        """
         try:
             logger.info(f"Deleting vectors for resume: {resume_id}")
             vector_ids = [
@@ -146,4 +181,4 @@ class PineconeService:
             return True
         except Exception as e:
             logger.error(f"Error deleting vectors for resume {resume_id}: {str(e)}")
-            raise        
+            raise

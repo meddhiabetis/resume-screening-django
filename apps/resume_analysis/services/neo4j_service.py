@@ -1,23 +1,39 @@
-from neo4j import GraphDatabase
-from django.conf import settings
 import logging
 from typing import List, Dict, Any
+from django.conf import settings
+from neo4j import GraphDatabase
 
 logger = logging.getLogger(__name__)
 
 class Neo4jService:
+    """Service class for interacting with Neo4j database for resume analysis.
+
+    This class provides methods to create, update, delete, and retrieve resumes
+    and their associated skills in the Neo4j database.
+    """
+
     def __init__(self):
+        """Initialize the Neo4jService with a database driver."""
         self._driver = GraphDatabase.driver(
             settings.NEO4J_URI,
             auth=(settings.NEO4J_USER, settings.NEO4J_PASSWORD)
         )
 
     def close(self):
+        """Close the Neo4j database driver."""
         self._driver.close()
-        
-        
+
     def create_or_update_resume(self, resume_data: Dict[str, Any]) -> str:
-        """Create or update a resume node with basic information"""
+        """Create or update a resume node with basic information.
+
+        Args:
+            resume_data (Dict[str, Any]): A dictionary containing resume information,
+                                            including 'id', 'file_name', 'vector_id',
+                                            'user_id', and 'skills'.
+
+        Returns:
+            str: The ID of the created or updated resume.
+        """
         with self._driver.session() as session:
             try:
                 # First, create or update the resume node
@@ -90,7 +106,16 @@ class Neo4jService:
                 raise
 
     def find_similar_resumes(self, resume_id: str, min_skill_match: int = 1, limit: int = 5) -> List[Dict[str, Any]]:
-        """Find similar resumes based on skills"""
+        """Find similar resumes based on skills.
+
+        Args:
+            resume_id (str): The ID of the resume to compare against.
+            min_skill_match (int): Minimum number of matching skills to consider a resume similar.
+            limit (int): Maximum number of similar resumes to return.
+
+        Returns:
+            List[Dict[str, Any]]: A list of dictionaries containing similar resumes' information.
+        """
         with self._driver.session() as session:
             try:
                 query = """
@@ -139,7 +164,11 @@ class Neo4jService:
                 return []
 
     def delete_resume(self, resume_id: str):
-        """Delete a resume and its relationships"""
+        """Delete a resume and its relationships.
+
+        Args:
+            resume_id (str): The ID of the resume to delete.
+        """
         with self._driver.session() as session:
             try:
                 query = """
@@ -156,7 +185,14 @@ class Neo4jService:
                 raise
 
     def get_resume_skills(self, resume_id: str) -> List[Dict[str, Any]]:
-        """Get all skills associated with a resume"""
+        """Get all skills associated with a resume.
+
+        Args:
+            resume_id (str): The ID of the resume to retrieve skills for.
+
+        Returns:
+            List[Dict[str, Any]]: A list of dictionaries containing skill information.
+        """
         with self._driver.session() as session:
             try:
                 query = """

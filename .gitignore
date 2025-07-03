@@ -1,59 +1,75 @@
-# Python cache files
+# === Python cache and compiled files ===
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
 *.pyo
 *.pyd
-.Python
-pythonenv*
+*$py.class
+*.so
 
-# Django
-*.log
-local_settings.py
+# === Ignore __pycache__ and pyc everywhere ===
+**/__pycache__/
+**/*.py[cod]
+
+# === Django-specific files ===
 db.sqlite3
 db.sqlite3-journal
-staticfiles/
-static/admin/
-*.pot
-*.mo
+*.sqlite3
+*.log
+local_settings.py
 
-# Media files and uploads
-media/
-media/**/*
-uploads/
-resumes/
-
-# Development environment
+# === Environment variables/secrets ===
 .env
 .env.*
 !.env.example
+credentials/*.json
+
+# === Media and uploads ===
+media/
+uploads/
+resumes/
+
+# === Static files (collected by collectstatic) ===
+staticfiles/
+static/admin/
+
+# === Celery files ===
+celerybeat-schedule*
+celerybeat.pid
+
+# === Development/Virtual environments ===
 .venv/
 venv/
 ENV/
 env/
+pythonenv*
+.Python
 .python-version
 
-# IDE
+# === IDE/project configs ===
 .idea/
 .vscode/
-*.swp
-*.swo
-*~
+*.sublime-workspace
+*.sublime-project
 .project
 .pydevproject
 .settings/
-*.sublime-workspace
-*.sublime-project
 
-# Distribution / packaging
+# === OS files ===
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+*~
+*.swp
+*.swo
+
+# === Distribution/Packaging ===
 build/
-develop-eggs/
 dist/
 downloads/
-eggs/
+develop-eggs/
 .eggs/
+eggs/
 lib/
 lib64/
 parts/
@@ -66,25 +82,19 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# Testing
+# === Testing/Coverage ===
 .coverage
 .tox/
 .pytest_cache/
 htmlcov/
 .hypothesis/
 
-# Project specific
-credentials.txt
+# === Project-specific files ===
+test_db_connection.py
+todo.txt
 setup_project.sh
 clean_cache.sh
 
-# Migrations
-**/migrations/__pycache__/
+# === Migration caches ===
 **/migrations/*.py[cod]
-
-# Operating System
-.DS_Store
-Thumbs.db
-*.bak
-*.tmp
-*.swp
+**/migrations/__pycache__/

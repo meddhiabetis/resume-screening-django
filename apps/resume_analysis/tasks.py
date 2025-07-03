@@ -1,13 +1,24 @@
+import logging
 from celery import shared_task
 from .models import Resume, ResumeContent
 from .services.document_processor import DocumentProcessor
 from .services.text_extractor import TextExtractor
-import logging
 
 logger = logging.getLogger(__name__)
 
 @shared_task
 def process_resume(resume_id):
+    """
+    Process a resume by its ID.
+
+    This function retrieves a resume from the database, updates its status to 'processing',
+    extracts text from the associated document, saves the extracted content, and updates
+    the resume status to 'processed'. In case of an error, it logs the error and updates
+    the resume status to 'failed'.
+
+    Args:
+        resume_id (int): The ID of the resume to process.
+    """
     try:
         resume = Resume.objects.get(id=resume_id)
         resume.status = 'processing'

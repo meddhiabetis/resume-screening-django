@@ -1,20 +1,41 @@
-from .text_extractor import TextExtractor
-from .pinecone_service import PineconeService
-from .neo4j_service import Neo4jService
 import logging
-from typing import Dict, Any
 import uuid
+from typing import Dict, Any
+from .neo4j_service import Neo4jService
+from .pinecone_service import PineconeService
+from .text_extractor import TextExtractor
 
 logger = logging.getLogger(__name__)
 
 class DocumentProcessor:
+    """Processes resumes by extracting text and storing data in vector and graph databases.
+
+    Attributes:
+        text_extractor (TextExtractor): Instance of TextExtractor for extracting text from resumes.
+        pinecone_service (PineconeService): Instance of PineconeService for storing vector embeddings.
+        neo4j_service (Neo4jService): Instance of Neo4jService for storing resume data in a graph database.
+    """
+
     def __init__(self):
+        """Initializes the DocumentProcessor with necessary services."""
         self.text_extractor = TextExtractor()
         self.pinecone_service = PineconeService()
         self.neo4j_service = Neo4jService()
 
     def process_resume(self, file_path: str, user_id: str, original_filename: str) -> Dict[str, Any]:
-        """Process a resume and store in both vector and graph databases"""
+        """Processes a resume file and stores the extracted data in both vector and graph databases.
+
+        Args:
+            file_path (str): The path to the resume file.
+            user_id (str): The ID of the user submitting the resume.
+            original_filename (str): The original filename of the resume.
+
+        Returns:
+            Dict[str, Any]: A dictionary containing the resume ID, vector ID, and extracted data.
+
+        Raises:
+            Exception: If an error occurs during the processing of the resume.
+        """
         try:
             # Extract text and structured data
             extracted_data = self.text_extractor.extract(file_path)
@@ -70,9 +91,14 @@ class DocumentProcessor:
             raise
 
     def _categorize_skill(self, skill: str) -> str:
-        """Categorize skills into predefined categories"""
-        # Implement your skill categorization logic here
-        # This is a simple example - you should expand this
+        """Categorizes a skill into predefined categories.
+
+        Args:
+            skill (str): The skill to categorize.
+
+        Returns:
+            str: The category of the skill.
+        """
         skill = skill.lower()
         categories = {
             'programming': ['python', 'java', 'javascript', 'c++', 'ruby'],

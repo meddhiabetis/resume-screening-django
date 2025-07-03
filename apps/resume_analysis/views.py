@@ -1,27 +1,34 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.http import HttpResponse, JsonResponse
-from django.core.files.storage import default_storage
-from django.conf import settings
-from django.urls import reverse
+import datetime
+import logging
 import os
-from .services.neo4j_service import Neo4jService
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.files.storage import default_storage
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render, redirect
+from django.urls import reverse
 from .models import Resume, ResumeContent
 from .services.document_processor import DocumentProcessor
-from .services.text_extractor import TextExtractor
-from .services.ocr_processor import OCRProcessor
-import logging
-from .services.pinecone_service import PineconeService
-from django.views.decorators.http import require_http_methods
-from .services.search_service import SearchService
 from .services.hybrid_rag_service import HybridRAGService
-import datetime 
+from .services.neo4j_service import Neo4jService
+from .services.ocr_processor import OCRProcessor
+from .services.pinecone_service import PineconeService
+from .services.search_service import SearchService
+from .services.text_extractor import TextExtractor
 
 logger = logging.getLogger(__name__)
 
 def process_resume(file_obj, resume):
-    """Process the uploaded resume file"""
+    """Process the uploaded resume file.
+
+    Args:
+        file_obj: The uploaded file object.
+        resume: The Resume instance associated with the uploaded file.
+
+    Returns:
+        ResumeContent instance if processing is successful, None otherwise.
+    """
     try:
         # Save file
         file_path = os.path.join('resumes', str(resume.file_id), file_obj.name)
@@ -163,13 +170,21 @@ def process_resume(file_obj, resume):
             resume.save()
         return None
     
-    
 @login_required
 def upload_form(request):
+    """Render the upload form for resumes."""
     return render(request, 'resume_analysis/upload_form.html')
 
 @login_required
 def upload_resumes(request):
+    """Handle the upload of resumes.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        JsonResponse indicating success or failure of the upload.
+    """
     if request.method == 'POST':
         try:
             files = request.FILES.getlist('resumes')
@@ -224,6 +239,15 @@ def upload_resumes(request):
 
 @login_required
 def view_resume(request, file_id):
+    """View a specific resume and its content.
+
+    Args:
+        request: The HTTP request object.
+        file_id: The ID of the resume to view.
+
+    Returns:
+        Rendered HTML response with resume details.
+    """
     resume = get_object_or_404(Resume, file_id=file_id, user=request.user)
     content = get_object_or_404(ResumeContent, resume=resume)
     
@@ -237,6 +261,15 @@ def view_resume(request, file_id):
 
 @login_required
 def delete_resume(request, file_id):
+    """Delete a specific resume and its associated data.
+
+    Args:
+        request: The HTTP request object.
+        file_id: The ID of the resume to delete.
+
+    Returns:
+        Redirects to the dashboard after deletion.
+    """
     if request.method == 'POST':
         resume = get_object_or_404(Resume, file_id=file_id, user=request.user)
         
@@ -247,7 +280,6 @@ def delete_resume(request, file_id):
             
             # Delete from Neo4j
             try:
-                from .services.neo4j_service import Neo4jService
                 neo4j_service = Neo4jService()
                 neo4j_service.delete_resume(str(resume.file_id))
             except Exception as graph_error:
@@ -270,7 +302,15 @@ def delete_resume(request, file_id):
 
 @login_required
 def extract_features(request, file_id):
-    """Extract features from a processed resume"""
+    """Extract features from a processed resume.
+
+    Args:
+        request: The HTTP request object.
+        file_id: The ID of the resume from which to extract features.
+
+    Returns:
+        JsonResponse with extracted features or error details.
+    """
     resume = get_object_or_404(Resume, file_id=file_id, user=request.user)
     content = get_object_or_404(ResumeContent, resume=resume)
     
@@ -297,8 +337,16 @@ def extract_features(request, file_id):
             'error': f'Feature extraction failed: {str(e)}',
             'details': getattr(content, 'processing_error', None)
         }, status=500)
+
 def search_similar_resumes(request):
-    """Search resumes using hybrid approach"""
+    """Search resumes using a hybrid approach.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        Rendered HTML response with search results.
+    """
     try:
         query = request.GET.get('query', '')
         search_type = request.GET.get('search_type', 'hybrid')
@@ -428,6 +476,14 @@ def search_similar_resumes(request):
         return redirect('accounts:dashboard')
     
 def dashboard(request):
+    """Render the dashboard showing all resumes.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        Rendered HTML response with the dashboard view.
+    """
     resumes = Resume.objects.all()
     search_results = request.GET.get('search_results', None)
 

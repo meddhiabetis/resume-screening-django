@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     # Local apps
     'apps.accounts.apps.AccountsConfig',
     'apps.resume_analysis.apps.ResumeAnalysisConfig',
+    
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -165,3 +167,15 @@ LOGGING = {
         },
     },
 }
+
+
+GOOGLE_OAUTH_CLIENT_SECRETS = os.path.join(BASE_DIR, 'credentials', 'google_oauth.json')
+GOOGLE_OAUTH_SCOPES = [
+    "openid",
+    "https://www.googleapis.com/auth/userinfo.profile",
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/gmail.readonly",
+]
+GOOGLE_OAUTH_REDIRECT_URI = "http://localhost:8000/accounts/gmail/callback/"
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'

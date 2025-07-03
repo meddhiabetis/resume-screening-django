@@ -1,4 +1,5 @@
 # Neo4j Configuration
+
 NEO4J_CONFIG = {
     'URI': "bolt://localhost:7687",
     'USER': "neo4j",

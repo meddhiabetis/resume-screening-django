@@ -1,13 +1,22 @@
+import logging
 from typing import List, Dict, Any
+from ..models import Resume
 from .neo4j_service import Neo4jService
 from .pinecone_service import PineconeService
-import logging
-from ..models import Resume
 
 logger = logging.getLogger(__name__)
 
 class HybridRAGService:
+    """
+    Service for performing hybrid resume analysis using vector and graph-based approaches.
+
+    Attributes:
+        neo4j (Neo4jService): Instance of Neo4jService for graph database operations.
+        pinecone (PineconeService): Instance of PineconeService for vector database operations.
+    """
+
     def __init__(self):
+        """Initialize the HybridRAGService with Neo4j and Pinecone services."""
         self.neo4j = Neo4jService()
         self.pinecone = PineconeService()
 
@@ -17,7 +26,16 @@ class HybridRAGService:
                       graph_weight: float = 0.4,
                       limit: int = 10) -> List[Dict[str, Any]]:
         """
-        Perform hybrid search using both vector and graph-based approaches
+        Perform hybrid search using both vector and graph-based approaches.
+
+        Args:
+            query (str): The search query string.
+            vector_weight (float): Weight for vector search results.
+            graph_weight (float): Weight for graph search results.
+            limit (int): Maximum number of results to return.
+
+        Returns:
+            List[Dict[str, Any]]: Combined and ranked search results.
         """
         try:
             # Get vector search results
@@ -79,7 +97,17 @@ class HybridRAGService:
                       graph_weight: float,
                       limit: int) -> List[Dict]:
         """
-        Merge and rank results from both vector and graph searches
+        Merge and rank results from both vector and graph searches.
+
+        Args:
+            vector_results (List[Dict]): Results from vector search.
+            graph_results (List[Dict]): Results from graph search.
+            vector_weight (float): Weight for vector results.
+            graph_weight (float): Weight for graph results.
+            limit (int): Maximum number of results to return.
+
+        Returns:
+            List[Dict]: Merged and ranked results.
         """
         merged = {}
 
@@ -143,7 +171,15 @@ class HybridRAGService:
                           file_name: str,
                           user_id: str,
                           extracted_data: Dict[str, Any]):
-        """Add a resume to the graph database"""
+        """
+        Add a resume to the graph database.
+
+        Args:
+            resume_id (str): Unique identifier for the resume.
+            file_name (str): Name of the resume file.
+            user_id (str): Identifier for the user who uploaded the resume.
+            extracted_data (Dict[str, Any]): Data extracted from the resume.
+        """
         try:
             # Process skills
             skills = []

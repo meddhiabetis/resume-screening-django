@@ -1,17 +1,13 @@
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
-from django.views.generic import RedirectView
+from apps.accounts import views as accounts_views  # import your dashboard view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", accounts_views.dashboard, name="home"),  # or redirect, your choice
     path(
-        "", RedirectView.as_view(url="/dashboard/", permanent=True), name="home"
-    ),  # Changed this line
-    path(
-        "dashboard/", include(("apps.accounts.urls", "accounts"), namespace="accounts")
-    ),  # Changed this line
+        "dashboard/", accounts_views.dashboard, name="dashboard"
+    ),  # <-- direct mapping
     path(
         "resume/",
         include(
@@ -19,4 +15,5 @@ urlpatterns = [
             namespace="resume_analysis",
         ),
     ),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path("accounts/", include("apps.accounts.urls")),
+]

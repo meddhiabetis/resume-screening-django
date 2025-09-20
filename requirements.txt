@@ -17,7 +17,7 @@ pytesseract
 Pillow
 
 # Vector Database
-pinecone-client
+pinecone
 # Graph Database
 neo4j
 
@@ -42,7 +42,6 @@ black
 flake8
 coverage
 
-
 google-auth
 google-auth-oauthlib
 google-auth-httplib2
@@ -51,3 +50,9 @@ requests
 celery
 redis
 celery[redis]
+
+dotenv
+django_celery_beat
+python-docx
+PyMuPDF
+easyocr

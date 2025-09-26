@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
 from django.conf import settings
+from django.urls import reverse
 from .forms import UserRegisterForm, UserUpdateForm, GmailFetchForm, UserProfileForm
 from .models import Profile
 from apps.resume_analysis.views import process_resume
@@ -17,7 +18,6 @@ from django.core.files.base import ContentFile
 
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
-
 
 
 def home(request):
@@ -192,36 +192,55 @@ def dashboard(request):
 def gmail_connect(request):
     """Initiate the Gmail OAuth flow for connecting the user's Gmail account."""
     flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
-        settings.GOOGLE_OAUTH_CLIENT_SECRETS, scopes=settings.GOOGLE_OAUTH_SCOPES
+        settings.GOOGLE_OAUTH_CLIENT_SECRETS,
+        scopes=settings.GOOGLE_OAUTH_SCOPES,
     )
-    flow.redirect_uri = settings.GOOGLE_OAUTH_REDIRECT_URI
+    # Build redirect_uri based on current request to avoid localhost/127.0.0.1 mismatches
+    flow.redirect_uri = request.build_absolute_uri(reverse("accounts:gmail_callback"))
 
     authorization_url, state = flow.authorization_url(
-        access_type="offline", include_granted_scopes="true", prompt="consent"
+        access_type="offline",
+        include_granted_scopes="true",
+        prompt="consent",
     )
     request.session["google_oauth_state"] = state
+    request.session["google_oauth_redirect_uri"] = flow.redirect_uri
+    request.session.save()
     return redirect(authorization_url)
 
 
 def gmail_callback(request):
     """Handle the callback from the Gmail OAuth flow and link the Gmail account to the user."""
-    state = request.session.get("google_oauth_state")
+    expected_state = request.session.get("google_oauth_state")
+    incoming_state = request.GET.get("state")
+
+    # Gracefully handle state mismatch: restart flow instead of error page
+    if not expected_state or incoming_state != expected_state:
+        messages.error(request, "OAuth state mismatch. Please try connecting again.")
+        request.session.pop("google_oauth_state", None)
+        request.session.pop("google_oauth_redirect_uri", None)
+        return redirect("accounts:gmail_connect")
+
     flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         settings.GOOGLE_OAUTH_CLIENT_SECRETS,
         scopes=settings.GOOGLE_OAUTH_SCOPES,
-        state=state,
+        state=expected_state,
     )
-    flow.redirect_uri = settings.GOOGLE_OAUTH_REDIRECT_URI
+    flow.redirect_uri = request.session.get("google_oauth_redirect_uri") or request.build_absolute_uri(
+        reverse("accounts:gmail_callback")
+    )
 
     authorization_response = request.build_absolute_uri()
     flow.fetch_token(authorization_response=authorization_response)
 
+    # Clear state after use
+    request.session.pop("google_oauth_state", None)
+    request.session.pop("google_oauth_redirect_uri", None)
+
     credentials = flow.credentials
 
     # Get user info from Google
-    userinfo_service = googleapiclient.discovery.build(
-        "oauth2", "v2", credentials=credentials
-    )
+    userinfo_service = googleapiclient.discovery.build("oauth2", "v2", credentials=credentials)
     user_info = userinfo_service.userinfo().get().execute()
     google_email = user_info.get("email")
 
@@ -231,16 +250,10 @@ def gmail_callback(request):
         return redirect("accounts:login")
 
     # Optional: Prevent Gmail already linked to another user
-    from apps.accounts.models import Profile  # adjust import if needed
+    from apps.accounts.models import Profile
 
-    if (
-        Profile.objects.filter(gmail_email=google_email)
-        .exclude(user=request.user)
-        .exists()
-    ):
-        messages.error(
-            request, "This Gmail account is already connected to another user."
-        )
+    if Profile.objects.filter(gmail_email=google_email).exclude(user=request.user).exists():
+        messages.error(request, "This Gmail account is already connected to another user.")
         return redirect("accounts:profile")
 
     # Link Gmail to the currently logged in user
@@ -256,9 +269,7 @@ def gmail_callback(request):
     profile.save()
 
     messages.success(request, f"Gmail account {google_email} connected successfully!")
-    return render(
-        request, "accounts/gmail_connected.html", {"email": profile.gmail_email}
-    )
+    return render(request, "accounts/gmail_connected.html", {"email": profile.gmail_email})
 
 
 @login_required

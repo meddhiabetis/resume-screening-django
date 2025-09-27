@@ -3,112 +3,278 @@
 
 {% block content %}
 <div class="container mt-4">
-    <div class="row mb-4">
-        <div class="col">
-            <h2>Search Results</h2>
-            <p class="text-muted">Query: {{ query }}</p>
-        </div>
+  <div class="row mb-4">
+    <div class="col">
+      <h2>Search Results</h2>
+      <p class="text-muted">Query: {{ query }}</p>
     </div>
-    {% if debug %}
-<div class="debug-info small text-muted mb-2">
-    <strong>Search Type:</strong> {{ result.debug_info.search_type }} |
-    <strong>Vector Score:</strong> {{ result.debug_info.vector_score }} |
-    <strong>Graph Score:</strong> {{ result.debug_info.graph_score }} |
-    <strong>Combined Score:</strong> {{ result.debug_info.combined_score }} |
-    <strong>Matching Skills:</strong> {{ result.debug_info.num_matching_skills }}
-</div>
-{% endif %}
-    <!-- Search Form -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <form method="GET" action="{% url 'resume_analysis:search_similar_resumes' %}">
-                <div class="row g-3">
-                    <div class="col-md-8">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white">
-                                <i class="bi bi-search"></i>
-                            </span>
-                            <input type="text" name="query" class="form-control" 
-                                   placeholder="Search resumes..." value="{{ query }}">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <select name="search_type" class="form-select">
-                            <option value="hybrid" {% if search_type == 'hybrid' %}selected{% endif %}>Hybrid Search</option>
-                            <option value="vector" {% if search_type == 'vector' %}selected{% endif %}>Vector Search</option>
-                            <option value="graph" {% if search_type == 'graph' %}selected{% endif %}>Graph Search</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary w-100">Search</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+  </div>
 
-    <!-- Results -->
-    {% if results %}
-    <div class="results-container">
-        {% for result in results %}
-        <div class="card mb-3">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start">
-                    <div>
-                        <h5 class="card-title mb-1">
-                            <i class="bi bi-file-text me-2"></i>
-                            {{ result.file_name }}
-                        </h5>
-                        <div class="text-muted small">
-                            Score: {{ result.combined_score|floatformat:3 }}
-                            {% if result.vector_score %}
-                            (Vector: {{ result.vector_score|floatformat:3 }})
-                            {% endif %}
-                            {% if result.graph_score %}
-                            (Graph: {{ result.graph_score|floatformat:3 }})
-                            {% endif %}
-                        </div>
-                    </div>
-                    <a href="{% url 'resume_analysis:view_resume' result.resume_id %}" 
-                       class="btn btn-sm btn-outline-primary">
-                        <i class="bi bi-eye"></i> View
-                    </a>
-                </div>
-
-                {% if result.matching_skills %}
-                <div class="mt-3">
-                    <h6 class="mb-2">Matching Skills:</h6>
-                    <div class="skill-tags">
-                        {% for skill in result.matching_skills %}
-                        <span class="badge bg-light text-dark border me-1 mb-1">{{ skill }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-                {% endif %}
+  <!-- Search Form -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <form id="searchForm" method="GET" action="{% url 'resume_analysis:search_similar_resumes' %}">
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text bg-white">
+                <i class="bi bi-search"></i>
+              </span>
+              <input
+                type="text"
+                name="query"
+                class="form-control"
+                placeholder="Search resumes..."
+                value="{{ query }}"
+              />
             </div>
+          </div>
+          <div class="col-md-2">
+            <select name="search_type" class="form-select">
+              <option value="hybrid" {% if search_type == 'hybrid' %}selected{% endif %}>Hybrid Search</option>
+              <option value="vector" {% if search_type == 'vector' %}selected{% endif %}>Vector Search</option>
+              <option value="graph" {% if search_type == 'graph' %}selected{% endif %}>Graph Search</option>
+            </select>
+          </div>
+
+          <!-- Hidden weight fields -->
+          <input type="hidden" name="w_skills" id="w_skills" value="{{ request.GET.w_skills|default:'1.0' }}">
+          <input type="hidden" name="w_companies" id="w_companies" value="{{ request.GET.w_companies|default:'1.0' }}">
+          <input type="hidden" name="w_schools" id="w_schools" value="{{ request.GET.w_schools|default:'1.0' }}">
+          <input type="hidden" name="w_titles" id="w_titles" value="{{ request.GET.w_titles|default:'1.0' }}">
+
+          <div class="col-md-4 text-end">
+            <div class="btn-group" role="group" aria-label="Weights controls">
+              <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#weightsModal">
+                <i class="bi bi-sliders"></i> Weights
+              </button>
+              <button type="button" class="btn btn-outline-secondary" id="equalBtn" title="Set all weights equal (1/n)">
+                1/n
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Search
+              </button>
+            </div>
+          </div>
         </div>
-        {% endfor %}
+      </form>
     </div>
-    {% else %}
-    <div class="alert alert-info">
-        <i class="bi bi-info-circle me-2"></i>
-        No results found for your search.
+  </div>
+
+  <!-- Results -->
+  {% if results %}
+  <div class="results-container">
+    {% for result in results %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <h5 class="card-title mb-1">
+              <i class="bi bi-file-text me-2"></i>
+              {{ result.file_name }}
+            </h5>
+            <div class="text-muted small">
+              Score: {{ result.combined_score|floatformat:3 }}
+              {% if result.vector_score %}
+                (Vector: {{ result.vector_score|floatformat:3 }})
+              {% endif %}
+              {% if result.graph_score %}
+                (Graph: {{ result.graph_score|floatformat:3 }})
+              {% endif %}
+            </div>
+          </div>
+          <a href="{% url 'resume_analysis:view_resume' result.resume_id %}" class="btn btn-sm btn-outline-primary">
+            <i class="bi bi-eye"></i> View
+          </a>
+        </div>
+
+        {% with has_skills=result.matching_skills|length has_titles=result.matched_titles|length has_companies=result.matched_companies|length has_schools=result.matched_schools|length %}
+        {% if has_skills or has_titles or has_companies or has_schools %}
+        <!-- Why this matched (only show sections that have values) -->
+        <div class="mt-3 p-2 rounded border bg-light">
+          <div class="small text-muted mb-2">
+            <i class="bi bi-info-circle me-1"></i>
+            Why this matched
+          </div>
+
+          {% if has_skills %}
+          <div class="mb-2">
+            <span class="badge bg-secondary me-1">Skills</span>
+            <div class="d-inline">
+              {% for skill in result.matching_skills %}
+                <span class="badge bg-light text-dark border me-1 mb-1">{{ skill }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if has_titles %}
+          <div class="mb-2">
+            <span class="badge bg-primary me-1">Titles</span>
+            <div class="d-inline">
+              {% for t in result.matched_titles %}
+                <span class="badge bg-light text-primary border me-1 mb-1">{{ t }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if has_companies %}
+          <div class="mb-2">
+            <span class="badge bg-success me-1">Companies</span>
+            <div class="d-inline">
+              {% for c in result.matched_companies %}
+                <span class="badge bg-light text-success border me-1 mb-1">{{ c }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if has_schools %}
+          <div>
+            <span class="badge bg-info text-dark me-1">Schools</span>
+            <div class="d-inline">
+              {% for s in result.matched_schools %}
+                <span class="badge bg-light text-info border me-1 mb-1">{{ s }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <!-- Score breakdown phrase -->
+        {% if result.score_explanation %}
+        <div class="mt-2 small text-muted">
+          <strong>Score breakdown:</strong> {{ result.score_explanation }}
+        </div>
+        {% endif %}
+      </div>
     </div>
-    {% endif %}
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-info">
+    <i class="bi bi-info-circle me-2"></i>
+    No results found for your search.
+  </div>
+  {% endif %}
+</div>
+
+<!-- Weights Modal -->
+<div class="modal fade" id="weightsModal" tabindex="-1" aria-labelledby="weightsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header py-2">
+        <h6 class="modal-title" id="weightsModalLabel">Adjust Weights</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-2">
+          <label class="form-label mb-1">Skills</label>
+          <input type="number" step="0.01" min="0" class="form-control form-control-sm" id="w_skills_input" />
+          <div class="form-text">Relative weight; final weights are normalized over requested categories.</div>
+        </div>
+        <div class="mb-2">
+          <label class="form-label mb-1">Companies</label>
+          <input type="number" step="0.01" min="0" class="form-control form-control-sm" id="w_companies_input" />
+        </div>
+        <div class="mb-2">
+          <label class="form-label mb-1">Schools</label>
+          <input type="number" step="0.01" min="0" class="form-control form-control-sm" id="w_schools_input" />
+        </div>
+        <div class="mb-2">
+          <label class="form-label mb-1">Titles</label>
+          <input type="number" step="0.01" min="0" class="form-control form-control-sm" id="w_titles_input" />
+        </div>
+      </div>
+      <div class="modal-footer py-2">
+        <button type="button" class="btn btn-outline-secondary btn-sm" id="modalEqualBtn">Equal 1/n</button>
+        <button type="button" class="btn btn-primary btn-sm" id="applyWeightsBtn">Apply</button>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
 
 {% block extra_css %}
 <style>
-    .skill-tags .badge {
-        font-size: 0.85rem;
-        padding: 0.4em 0.8em;
+  .results-container .card:hover {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+  }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  (function() {
+    const form = document.getElementById('searchForm');
+    const wSkills = document.getElementById('w_skills');
+    const wCompanies = document.getElementById('w_companies');
+    const wSchools = document.getElementById('w_schools');
+    const wTitles = document.getElementById('w_titles');
+
+    const inSkills = document.getElementById('w_skills_input');
+    const inCompanies = document.getElementById('w_companies_input');
+    const inSchools = document.getElementById('w_schools_input');
+    const inTitles = document.getElementById('w_titles_input');
+
+    function toNum(v, fallback) {
+      const n = parseFloat(v);
+      return isNaN(n) || n < 0 ? fallback : n;
     }
 
-    .results-container .card:hover {
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-        transform: translateY(-1px);
-        transition: all 0.2s ease;
+    function loadModalFromHidden() {
+      inSkills.value = toNum(wSkills.value, 1.0).toFixed(2);
+      inCompanies.value = toNum(wCompanies.value, 1.0).toFixed(2);
+      inSchools.value = toNum(wSchools.value, 1.0).toFixed(2);
+      inTitles.value = toNum(wTitles.value, 1.0).toFixed(2);
     }
-</style>
+
+    function setEqualHidden() {
+      wSkills.value = '1.0';
+      wCompanies.value = '1.0';
+      wSchools.value = '1.0';
+      wTitles.value = '1.0';
+    }
+
+    function setEqualModal() {
+      inSkills.value = '1.00';
+      inCompanies.value = '1.00';
+      inSchools.value = '1.00';
+      inTitles.value = '1.00';
+    }
+
+    function applyModalToHidden() {
+      wSkills.value = toNum(inSkills.value, 1.0).toString();
+      wCompanies.value = toNum(inCompanies.value, 1.0).toString();
+      wSchools.value = toNum(inSchools.value, 1.0).toString();
+      wTitles.value = toNum(inTitles.value, 1.0).toString();
+    }
+
+    // Open modal initializes fields
+    const weightsModalEl = document.getElementById('weightsModal');
+    weightsModalEl.addEventListener('show.bs.modal', loadModalFromHidden);
+
+    // Modal Equal button
+    document.getElementById('modalEqualBtn').addEventListener('click', setEqualModal);
+
+    // Apply in modal
+    document.getElementById('applyWeightsBtn').addEventListener('click', function() {
+      applyModalToHidden();
+      const modal = bootstrap.Modal.getInstance(weightsModalEl);
+      if (modal) modal.hide();
+      form.submit();
+    });
+
+    // Top-level Equal 1/n button
+    document.getElementById('equalBtn').addEventListener('click', function() {
+      setEqualHidden();
+      form.submit();
+    });
+  })();
+</script>
 {% endblock %}
